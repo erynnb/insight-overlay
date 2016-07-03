@@ -64,8 +64,11 @@ body {
 #blue-team-name, #red-team-name {
   font-family: BigNoodle;
   color:white;
-  font-size: 24px;
   z-index: 15;
+  letter-spacing: 1.5px;
+  font-size: 43px;
+  line-height: 0.9;
+
 }
 #blue-team-score, #red-team-score {
   font-family: LemonMilk;
@@ -83,8 +86,7 @@ body {
 }
 #blue-team-name {
   position:fixed;
-  left: 200px;
-  font-size:40px;
+  left: 235px;
   top: 10px;
 }
 #red-team-score {
@@ -96,8 +98,7 @@ body {
 }
 #red-team-name {
   position:fixed;
-  right:200px;
-  font-size:40px;
+  right:235px;
   top: 10px;
 }
 #left-logo, #right-logo {
@@ -108,8 +109,8 @@ body {
   opacity:0;
 }
 #left-logo {
-  left: 100px;
+  left: 140px;
 }
 #right-logo {
-  right:100px;
+  right:140px;
 }
