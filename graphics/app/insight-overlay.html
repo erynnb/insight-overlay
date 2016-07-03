@@ -17,7 +17,7 @@
 					<iron-image id="left-logo" src="../img/logo.png"> </iron-image>
 					<div class="blue-info">
 						<span id="blue-team-name"></span>
-						<span id="blue-team-score"> [[bluescore]] </span>
+				<!--		<span id="blue-team-score"> [[bluescore]] </span> -->
 					</div>
 				</div>
 
@@ -28,7 +28,7 @@
 					<iron-image id="right-logo" src="../img/logo.png"> </iron-image>
 					<div class="red-info">
 						<span id="red-team-name"> </span>
-						<span id="red-team-score">[[redscore]]</span>
+		<!--				<span id="red-team-score">[[redscore]]</span> -->
 					</div>
 
 				</div>
@@ -84,8 +84,8 @@
 			});
 
 			nodecg.Replicant('teamScores').on('change', function(oldVal, newVal) {
-				self.bluescore = teamScores.value[0];
-				self.redscore = teamScores.value[1];
+		//		self.bluescore = teamScores.value[0];
+		//		self.redscore = teamScores.value[1];
 				var t3 = new TimelineLite();
 
 
@@ -110,9 +110,9 @@
 					text: self.bluename,
 					ease: SteppedEase.easeIn
 				}, 1);
-				t1.to(('#blue-team-score'), 0.2, {
-					opacity: 1
-				}, 2);
+			//	t1.to(('#blue-team-score'), 0.2, {
+			//		opacity: 1
+			//	}, 2);
 
 				t1.to(('#right-line-top'), 0.5, {
 					right: '165px'
@@ -130,9 +130,9 @@
 					text: self.redname,
 					ease: SteppedEase.easeIn
 				}, 1);
-				t1.to(('#red-team-score'), 0.2, {
-					opacity: 1
-				}, 2);
+				//t1.to(('#red-team-score'), 0.2, {
+				//	opacity: 1
+		///		}, 2);
 				isShowing = true;
 			});
 			nodecg.listenFor('fadeOut', function() {
