@@ -1,0 +1,115 @@
+@font-face {
+    font-family: BigNoodle;
+    src: url('../fonts/big_noodle_titling_oblique.ttf');
+}
+@font-face {
+    font-family: LemonMilk;
+    src: url('../fonts/LEMONMILK.OTF');
+}
+html, body {
+  min-width: 1920px;
+  background-repeat: no-repeat;
+}
+body {
+  background-image: url('../img/Watchpoint_screen_5.jpg');
+}
+.left {
+  float:left;
+}
+.right {
+  float:right;
+}
+#left-line-top {
+  position:fixed;
+  top: 0;
+  /**left: 165px; **/
+  left:-900px;
+  z-index:10;
+}
+#left-bar-top {
+  position:fixed;
+  /**left:0; **/
+  left:-900px;
+  top:0;
+}
+#left-glow {
+  position:fixed;
+  /**left:0;**/
+  left:-900px;
+  top:0;
+  z-index: 5;
+}
+#right-line-top {
+  position:fixed;;
+  top:0;
+  /**right:165px;**/
+  right:-900px;
+  z-index:10;
+}
+#right-bar-top {
+  position:fixed;
+  top:0;
+  /**right:0;**/
+  right: -900px;
+}
+#right-glow {
+  position:fixed;
+  top:0;
+  /**right:0;**/
+  right:-900px;
+}
+.blue-info, .red-info {
+  z-index: 100;
+}
+#blue-team-name, #red-team-name {
+  font-family: BigNoodle;
+  color:white;
+  font-size: 24px;
+  z-index: 15;
+}
+#blue-team-score, #red-team-score {
+  font-family: LemonMilk;
+  color:white;
+  font-size: 24px;
+  z-index: 15;
+  opacity:0;
+}
+#blue-team-score {
+  position:fixed;
+  left: 750px;
+  top: 15px;
+  font-size:50px;
+  font-stretch: condensed;
+}
+#blue-team-name {
+  position:fixed;
+  left: 200px;
+  font-size:40px;
+  top: 10px;
+}
+#red-team-score {
+  position:fixed;
+  right:758px;
+  font-size: 50px;
+  top: 15px;
+  font-stretch: condensed;
+}
+#red-team-name {
+  position:fixed;
+  right:200px;
+  font-size:40px;
+  top: 10px;
+}
+#left-logo, #right-logo {
+  z-index:80;
+  height:51px;
+  position:fixed;
+  top:0;
+  opacity:0;
+}
+#left-logo {
+  left: 100px;
+}
+#right-logo {
+  right:100px;
+}

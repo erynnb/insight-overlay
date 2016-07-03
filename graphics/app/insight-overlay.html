@@ -1,0 +1,185 @@
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/iron-image/iron-image.html">
+<script src="../components/gsap/src/minified/TweenMax.min.js"></script>
+<script src="../components/gsap/src/minified/plugins/TextPlugin.min.js"></script>
+
+<dom-module id="insight-overlay">
+	<template>
+
+		<div class="cull">
+
+			<div class="top" layout horizontal>
+				<div class="left" flex>
+
+					<iron-image id="left-line-top" src="../img/blue_line.png"> </iron-image>
+					<iron-image id="left-bar-top" src="../img/left_bar_top.png"> </iron-image>
+					<iron-image id="left-glow" src="../img/blue_glow.png"> </iron-image>
+					<iron-image id="left-logo" src="../img/logo.png"> </iron-image>
+					<div class="blue-info">
+						<span id="blue-team-name"></span>
+						<span id="blue-team-score"> [[bluescore]] </span>
+					</div>
+				</div>
+
+				<div class="right" flex>
+					<iron-image id="right-line-top" src="../img/red_line.png"> </iron-image>
+					<iron-image id="right-bar-top" src="../img/right_bar_top.png"> </iron-image>
+					<iron-image id="right-glow" src="../img/red_glow.png"> </iron-image>
+					<iron-image id="right-logo" src="../img/logo.png"> </iron-image>
+					<div class="red-info">
+						<span id="red-team-name"> </span>
+						<span id="red-team-score">[[redscore]]</span>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+		</div>
+
+	</template>
+
+
+</dom-module>
+
+<script>
+	Polymer({
+		is: 'insight-overlay',
+		properties: {
+			bluename: String,
+			redname: String,
+			bluescore: String,
+			redscore: String
+		},
+
+		ready: function() {
+			var self = this;
+			var n1;
+			var n2;
+			var teamNames = nodecg.Replicant('teamNames');
+			var teamScores = nodecg.Replicant('teamScores');
+			var fadeIn = nodecg.Replicant('fadeIn');
+			var fadeOut = nodecg.Replicant('fadeOut');
+			var t1 = new TimelineLite();
+
+			var isShowing = false;
+
+
+			nodecg.Replicant('teamNames').on('change', function(oldVal, newVal) {
+				var t2 = new TimelineLite();
+
+				self.bluename = teamNames.value[0];
+				self.redname = teamNames.value[1];
+				if (isShowing === true) {
+					t2.to(('#blue-team-name'), 0.2, {
+						text: self.bluename,
+						ease: Linear.easeNone
+					}, 0.1);
+					t2.to(('#red-team-name'), 0.2, {
+						text: self.redname,
+						ease: Linear.easeNone
+					}, 0.1);
+
+				}
+			});
+
+			nodecg.Replicant('teamScores').on('change', function(oldVal, newVal) {
+				self.bluescore = teamScores.value[0];
+				self.redscore = teamScores.value[1];
+				var t3 = new TimelineLite();
+
+
+			});
+
+			nodecg.listenFor('fadeIn', function() {
+				var t1 = new TimelineLite();
+
+				t1.to(('#left-line-top'), 0.5, {
+					left: '165px'
+				}, 0);
+				t1.to(('#left-glow'), 0.5, {
+					left: '0px'
+				}, 0.6);
+				t1.to(('#left-bar-top'), 0.5, {
+					left: '0px'
+				}, 0.5);
+				t1.to(('#left-logo'), 0.5, {
+					opacity: 1
+				}, 1);
+				t1.to(('#blue-team-name'), 1, {
+					text: self.bluename,
+					ease: SteppedEase.easeIn
+				}, 1);
+				t1.to(('#blue-team-score'), 0.2, {
+					opacity: 1
+				}, 2);
+
+				t1.to(('#right-line-top'), 0.5, {
+					right: '165px'
+				}, 0);
+				t1.to(('#right-glow'), 0.5, {
+					right: '0px'
+				}, 0.6);
+				t1.to(('#right-bar-top'), 0.5, {
+					right: '0px'
+				}, 0.5);
+				t1.to(('#right-logo'), 0.5, {
+					opacity: 1
+				}, 1);
+				t1.to(('#red-team-name'), 1, {
+					text: self.bluename,
+					ease: SteppedEase.easeIn
+				}, 1);
+				t1.to(('#red-team-score'), 0.2, {
+					opacity: 1
+				}, 2);
+				isShowing = true;
+			});
+			nodecg.listenFor('fadeOut', function() {
+				var t1 = new TimelineLite();
+
+				t1.to(('#left-line-top'), 0.5, {
+					left: '-900px'
+				}, 1.1);
+				t1.to(('#left-glow'), 0.2, {
+					left: '-900px'
+				}, 1);
+				t1.to(('#left-bar-top'), 0.2, {
+					left: '-900px'
+				}, 0.8);
+				t1.to(('#left-logo'), 0.2, {
+					opacity: 0
+				}, 0.7);
+				t1.to(('#blue-team-name'), 0.5, {
+					text: '',
+					ease: SteppedEase.easeIn
+				}, 0.2);
+				t1.to(('#blue-team-score'), 0.2, {
+					opacity: 0
+				}, 0);
+
+				t1.to(('#right-line-top'), 0.5, {
+					right: '-900px'
+				}, 1.1);
+				t1.to(('#right-glow'), 0.2, {
+					right: '-900px'
+				}, 1);
+				t1.to(('#right-bar-top'), 0.2, {
+					right: '-900px'
+				}, 0.8);
+				t1.to(('#right-logo'), 0.2, {
+					opacity: 0
+				}, 0.7);
+				t1.to(('#red-team-name'), 0.5, {
+					text: '',
+					ease: SteppedEase.easeIn
+				}, 0.2);
+				t1.to(('#red-team-score'), 0.2, {
+					opacity: 0
+				}, 0);
+				isShowing = false;
+			});
+
+		}
+	})
+</script>

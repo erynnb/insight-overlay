@@ -1,6 +1,49 @@
 <!DOCTYPE html>
 
-
 <head>
+  <script src="components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="components/jquery/dist/jquery.min.js"></script>
+
+  <link rel="import" href="components/polymer/polymer.html">
+  	<link rel="import" href="components/paper-input/paper-input.html">
+<link rel="import" href="components/paper-button/paper-button.html">
 
 </head>
+<body>
+
+<dom-module name="overlay-panel">
+
+<template>
+  <div class="teams">
+    <paper-input label="Blue Team" id="blue-team"> </paper-input>
+    <paper-input label="Red Team" id="red-team"></paper-input>
+    <paper-button raised id="addteams">Update Teams </paper-button>
+  </div>
+  <div class = "scores">
+    <paper-input label="Blue Score" id="blue-score"> </paper-input>
+    <paper-input label="Red Score" id="red-score"></paper-input>
+    <paper-button raised id="addscores">Update Scores</paper-button>
+  </div>
+  <paper-button raised id="swapteams">Swap Sides</paper-button>
+  <paper-button raised id="fadein">FADE IN</paper-button>
+  <paper-button  raised id="fadeout">FADE OUT</paper-button>
+
+</template>
+
+<script>
+
+  Polymer({
+    is: 'overlay-panel'
+  });
+//});
+
+</script>
+
+</dom-module>
+
+<div class="horizontal layout">
+	<overlay-panel></overlay-panel>
+</div>
+
+<script src="js/overlay-panel.js"></script>
+</div>
