@@ -14,7 +14,7 @@
 					<iron-image id="left-line-top" src="../img/blue_line.png"> </iron-image>
 					<iron-image id="left-bar-top" src="../img/left_bar_top.png"> </iron-image>
 					<iron-image id="left-glow" src="../img/blue_glow.png"> </iron-image>
-					<iron-image id="left-logo" src="../img/logo.png"> </iron-image>
+					<iron-image id="left-logo" src="../../../assets/insight-overlay/teamlogos/{{bluelogo}}"> </iron-image>
 					<div class="blue-info">
 						<span id="blue-team-name"></span>
 				<!--		<span id="blue-team-score"> [[bluescore]] </span> -->
@@ -25,7 +25,7 @@
 					<iron-image id="right-line-top" src="../img/red_line.png"> </iron-image>
 					<iron-image id="right-bar-top" src="../img/right_bar_top.png"> </iron-image>
 					<iron-image id="right-glow" src="../img/red_glow.png"> </iron-image>
-					<iron-image id="right-logo" src="../img/logo.png"> </iron-image>
+					<iron-image id="right-logo" src="../../../assets/insight-overlay/teamlogos/{{redlogo}}"> </iron-image>
 					<div class="red-info">
 						<span id="red-team-name"> </span>
 		<!--				<span id="red-team-score">[[redscore]]</span> -->
@@ -58,16 +58,17 @@
 			var n2;
 			var teamNames = nodecg.Replicant('teamNames');
 			var teamScores = nodecg.Replicant('teamScores');
+			var teamLogos = nodecg.Replicant('teamLogos');
 			var fadeIn = nodecg.Replicant('fadeIn');
 			var fadeOut = nodecg.Replicant('fadeOut');
 			var t1 = new TimelineLite();
+			var t2 = new TimelineLite();
 
 			var isShowing = false;
 
 
 			nodecg.Replicant('teamNames').on('change', function(oldVal, newVal) {
 				var t2 = new TimelineLite();
-
 				self.bluename = teamNames.value[0];
 				self.redname = teamNames.value[1];
 				if (isShowing === true) {
@@ -86,9 +87,10 @@
 			nodecg.Replicant('teamScores').on('change', function(oldVal, newVal) {
 		//		self.bluescore = teamScores.value[0];
 		//		self.redscore = teamScores.value[1];
-				var t3 = new TimelineLite();
-
-
+			});
+			nodecg.Replicant('teamLogos').on('change', function(oldVal, newVal) {
+				self.bluelogo = teamLogos.value[0];
+				self.redlogo = teamLogos.value[1];
 			});
 
 			nodecg.listenFor('fadeIn', function() {

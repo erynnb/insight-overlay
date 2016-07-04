@@ -4,6 +4,17 @@
     "compatibleRange": "~0.8.0",
     "bundleDependencies": {
     },
+    "assetCategories": [
+      {
+        "name": "teamlogos",
+        "title": "Team Scoreboard Logos",
+        "allowedTypes": [
+          "jpg",
+          "jpeg",
+          "png"
+        ]
+      }
+    ],
     "dashboardPanels": [
       {
         "name": "overlay-panel",
@@ -11,23 +22,6 @@
         "width": 2,
         "headerColor": "#2d4e8a",
         "file": "overlay-panel.html"
-      },
-      {
-        "name": "overlay-dialog",
-        "title": "Sample Dialog",
-        "width": 2,
-        "dialog": true,
-        "dialogButtons": [
-          {
-            "name": "save",
-            "type": "confirm"
-          },
-          {
-            "name": "cancel",
-            "type": "dismiss"
-          }
-        ],
-        "file": "overlay-dialog.html"
       }
     ],
     "graphics": [

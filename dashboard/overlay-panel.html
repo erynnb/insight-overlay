@@ -7,6 +7,8 @@
   <link rel="import" href="components/polymer/polymer.html">
   	<link rel="import" href="components/paper-input/paper-input.html">
 <link rel="import" href="components/paper-button/paper-button.html">
+<link rel="import" href="components/paper-listbox/paper-listbox.html">
+<link rel="import" href="components/paper-item/paper-item.html">
 
 </head>
 <body>
@@ -19,6 +21,11 @@
     <paper-input label="Red Team" id="red-team"></paper-input>
     <paper-button raised id="addteams">Update Teams </paper-button>
   </div>
+
+  <paper-input label="Blue logo" id="blue-logo"> </paper-input>
+  <paper-input label="Red logo" id="red-logo"></paper-input>
+  <paper-button raised id="addlogos">Update Logos</paper-button>
+
   <div class = "scores">
     <paper-input label="Blue Score" id="blue-score"> </paper-input>
     <paper-input label="Red Score" id="red-score"></paper-input>
@@ -33,7 +40,23 @@
 <script>
 
   Polymer({
-    is: 'overlay-panel'
+    is: 'overlay-panel',
+    ready: function() {
+      teamlogosReplicant = nodecg.Replicant('assets:teamlogos');
+      self.teamlogos = [];
+      //this.teamlogos = [];
+      //console.log(this.teamlogos);
+      teamlogosReplicant.on('change', function(newVal, oldVal) {
+        self.teamlogos = newVal;
+
+      });
+    },
+    setList: function(teamLogoList) {
+    //  this.teams = teamLogoList;
+    },
+    addLogo: function(logo) {
+      //this.push('teamlogos', logo);
+    }
   });
 //});
 

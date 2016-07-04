@@ -10,6 +10,12 @@
 	var swapTeams = document.getElementById('swapteams');
 	var fadeIn = document.getElementById('fadein');
 	var fadeOut = document.getElementById('fadeout');
+  var addlogos = document.getElementById('addlogos');
+
+	var dashboardLogoReplicant = nodecg.Replicant('teamLogos');
+
+	var uploads;
+	var teamlogosReplicant = nodecg.Replicant('assets:teamlogos');
 
 	addTeams.addEventListener('click', function() {
 		teamNamesReplicant.value = [
@@ -35,11 +41,16 @@
 		var tempBlueName = document.getElementById('blue-team').value;
 		var tempBlueScore = document.getElementById('blue-score').value;
 		var tempRedScore = document.getElementById('red-score').value;
+		var tempBlueLogo = document.getElementById('blue-logo').value;
+		var tempRedLogo = document.getElementById('red-logo').value;
 
 		document.getElementById('blue-team').value = tempRedName;
 		document.getElementById('red-team').value = tempBlueName;
 		document.getElementById('blue-score').value = tempRedScore;
 		document.getElementById('red-score').value = tempBlueScore;
+		document.getElementById('blue-logo').value = tempRedLogo;
+		document.getElementById('red-logo').value = tempBlueLogo;
+
 		teamScoresReplicant.value = [
 			document.getElementById('blue-score').value,
 			document.getElementById('red-score').value
@@ -48,6 +59,12 @@
 			document.getElementById('blue-team').value,
 			document.getElementById('red-team').value
 		];
+		dashboardLogoReplicant.value = [
+			document.getElementById('blue-logo').value,
+			document.getElementById('red-logo').value
+		];
+		nodecg.sendMessage('teamLogos');
+
 		nodecg.sendMessage('teamScores');
 		nodecg.sendMessage('teamNames');
 
@@ -69,5 +86,31 @@
 		nodecg.sendMessage('fadeOut');
 
 	});
+/**
+*  Below is a temp logo thing. Need to implement this better.
+*/
+
+addlogos.addEventListener('click', function() {
+	dashboardLogoReplicant.value = [
+		document.getElementById('blue-logo').value,
+		document.getElementById('red-logo').value
+	];
+	nodecg.sendMessage('teamLogos');
+
+});
+
+	teamlogosReplicant.on('change', function(newVal, oldVal) {
+		uploads = newVal;
+	});
+
+	function updateLogos() {
+		var $list = document.querySelector('logos-list');
+		for (var i = 0; i < uploads.length; i++) {
+			$list.addLogo({
+				url: uploads[i].url,
+				name: uploads[i].name
+			})
+		}
+	}
 
 })();
