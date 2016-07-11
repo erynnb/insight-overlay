@@ -12,10 +12,13 @@
 	var fadeOut = document.getElementById('fadeout');
   var addlogos = document.getElementById('addlogos');
 
+	var switchImage = document.getElementById('switch-images');
+
 	var dashboardLogoReplicant = nodecg.Replicant('teamLogos');
 
 	var uploads;
 	var teamlogosReplicant = nodecg.Replicant('assets:teamlogos');
+
 
 	addTeams.addEventListener('click', function() {
 		teamNamesReplicant.value = [
@@ -98,6 +101,12 @@ addlogos.addEventListener('click', function() {
 	nodecg.sendMessage('teamLogos');
 
 });
+
+switchImage.addEventListener('click', function() {
+	nodecg.sendMessage('switchImages');
+});
+
+
 
 	teamlogosReplicant.on('change', function(newVal, oldVal) {
 		uploads = newVal;

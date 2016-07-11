@@ -11,9 +11,10 @@
 			<div class="top" layout horizontal>
 				<div class="left" flex>
 
-					<iron-image id="left-line-top" src="../img/blue_line.png"> </iron-image>
-					<iron-image id="left-bar-top" src="../img/left_bar_top.png"> </iron-image>
-					<iron-image id="left-glow" src="../img/blue_glow.png"> </iron-image>
+					<iron-image id="left-line-top" src="../insight-overlay/img/blue_line{{type}}.png"> </iron-image>
+					<iron-image id="left-bar-top" src="../insight-overlay/img/left_bar_top{{type}}.png"> </iron-image>
+
+					<iron-image id="left-glow" src="../insight-overlay/img/blue_glow{{type}}.png"> </iron-image>
 					<iron-image id="left-logo" src="../../../assets/insight-overlay/teamlogos/{{bluelogo}}"> </iron-image>
 					<div class="blue-info">
 						<span id="blue-team-name"></span>
@@ -22,9 +23,9 @@
 				</div>
 
 				<div class="right" flex>
-					<iron-image id="right-line-top" src="../img/red_line.png"> </iron-image>
-					<iron-image id="right-bar-top" src="../img/right_bar_top.png"> </iron-image>
-					<iron-image id="right-glow" src="../img/red_glow.png"> </iron-image>
+					<iron-image id="right-line-top" src="../insight-overlay/img/red_line{{type}}.png"> </iron-image>
+					<iron-image id="right-bar-top" src="../insight-overlay/img/right_bar_top{{type}}.png"> </iron-image>
+					<iron-image id="right-glow" src="../insight-overlay/img/red_glow{{type}}.png"> </iron-image>
 					<iron-image id="right-logo" src="../../../assets/insight-overlay/teamlogos/{{redlogo}}"> </iron-image>
 					<div class="red-info">
 						<span id="red-team-name"> </span>
@@ -49,7 +50,9 @@
 			bluename: String,
 			redname: String,
 			bluescore: String,
-			redscore: String
+			redscore: String,
+			type: String
+
 		},
 
 		ready: function() {
@@ -61,11 +64,13 @@
 			var teamLogos = nodecg.Replicant('teamLogos');
 			var fadeIn = nodecg.Replicant('fadeIn');
 			var fadeOut = nodecg.Replicant('fadeOut');
+			var switchImages = nodecg.Replicant('switchImages');
 			var t1 = new TimelineLite();
 			var t2 = new TimelineLite();
+			self.type='';
 
 			var isShowing = false;
-
+      var imageType = 'original';
 
 			nodecg.Replicant('teamNames').on('change', function(oldVal, newVal) {
 				var t2 = new TimelineLite();
@@ -82,6 +87,16 @@
 					}, 0.1);
 
 				}
+			});
+
+			nodecg.listenFor('switchImages', function() {
+				if (self.type == '') {
+	    	self.type='_alt';
+			}
+				else {
+					self.type = '';
+				}
+
 			});
 
 			nodecg.Replicant('teamScores').on('change', function(oldVal, newVal) {
