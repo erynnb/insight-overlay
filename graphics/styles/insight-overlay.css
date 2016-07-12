@@ -73,16 +73,17 @@ body {
 #blue-team-score, #red-team-score {
   font-family: LemonMilk;
   color:white;
-  font-size: 24px;
+  font-size: 35px;
   z-index: 15;
   opacity:0;
+  transform: matrix(1, -0.5,0, 1.1, 0, 0);
+  -ms-transform: matrix(1, -0.5,0, 1.1, 0, 0); /* IE 9 */
+  -webkit-transform:  matrix(1, -0.5,0, 1.1, 0, 0); /* Safari */
+  top: 10px;
 }
 #blue-team-score {
   position:fixed;
-  left: 750px;
-  top: 15px;
-  font-size:50px;
-  font-stretch: condensed;
+  left: 765px;
 }
 #blue-team-name {
   position:fixed;
@@ -91,10 +92,7 @@ body {
 }
 #red-team-score {
   position:fixed;
-  right:758px;
-  font-size: 50px;
-  top: 15px;
-  font-stretch: condensed;
+  right:765px;
 }
 #red-team-name {
   position:fixed;
