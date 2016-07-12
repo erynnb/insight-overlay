@@ -76,14 +76,14 @@ body {
   font-size: 35px;
   z-index: 15;
   opacity:0;
-  transform: matrix(1, -0.5,0, 1.1, 0, 0);
-  -ms-transform: matrix(1, -0.5,0, 1.1, 0, 0); /* IE 9 */
-  -webkit-transform:  matrix(1, -0.5,0, 1.1, 0, 0); /* Safari */
+  transform: matrix(1, 0,0, 1.2, 0, 0);
+  -ms-transform: matrix(1, 0,0, 1.2, 0, 0); /* IE 9 */
+  -webkit-transform:  matrix(1, 0,0, 1.2, 0, 0); /* Safari */
   top: 10px;
 }
 #blue-team-score {
   position:fixed;
-  left: 765px;
+  left: 785px;
 }
 #blue-team-name {
   position:fixed;
@@ -92,7 +92,7 @@ body {
 }
 #red-team-score {
   position:fixed;
-  right:765px;
+  right:785px;
 }
 #red-team-name {
   position:fixed;
