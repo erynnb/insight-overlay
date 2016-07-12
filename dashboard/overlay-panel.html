@@ -37,6 +37,7 @@
 
 
 <paper-button raised id="switch-images"> Switch Overlay Type </paper-button>
+<div id="alert"> </div>
 
 </template>
 
@@ -45,12 +46,21 @@
   Polymer({
     is: 'overlay-panel',
     ready: function() {
+      switchAlert = nodecg.Replicant('switchType');
+
       teamlogosReplicant = nodecg.Replicant('assets:teamlogos');
       self.teamlogos = [];
       //this.teamlogos = [];
       //console.log(this.teamlogos);
       teamlogosReplicant.on('change', function(newVal, oldVal) {
         self.teamlogos = newVal;
+
+        if (switchAlert.value == "_alt") {
+          alert = "Alt Version";
+          document.getElementById('alert').innerHTML = "Alt Version";
+        } else {
+          document.getElementById('alert').innerHTML = "Orignal Version";
+        }
 
       });
     },
@@ -60,6 +70,7 @@
     addLogo: function(logo) {
       //this.push('teamlogos', logo);
     }
+
   });
 //});
 

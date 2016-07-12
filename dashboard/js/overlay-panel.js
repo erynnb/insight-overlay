@@ -19,6 +19,8 @@
 	var uploads;
 	var teamlogosReplicant = nodecg.Replicant('assets:teamlogos');
 
+ var alert;
+
 
 	addTeams.addEventListener('click', function() {
 		teamNamesReplicant.value = [
@@ -103,7 +105,14 @@ addlogos.addEventListener('click', function() {
 });
 
 switchImage.addEventListener('click', function() {
+
 	nodecg.sendMessage('switchImages');
+	switchAlert = nodecg.Replicant('switchType');
+	if (switchAlert.value == "_alt") {
+		document.getElementById('alert').innerHTML = "Orignal Version";
+	} else {
+		document.getElementById('alert').innerHTML = "Alt Version";
+	}
 });
 
 
