@@ -100,8 +100,8 @@
 		dashboardLogoReplicant.value = [
 			//document.getElementById('blue-logo').value,
 			//document.getElementById('red-logo').value
-			document.getElementById('blue-dropdown').value,
-			document.getElementById('red-dropdown').value
+			document.getElementById('blue-logo').value,
+			document.getElementById('red-logo').value
 		];
 		nodecg.sendMessage('teamLogos');
 

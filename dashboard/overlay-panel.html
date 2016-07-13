@@ -31,25 +31,17 @@
 				<paper-button raised id="addteams">Update Teams </paper-button>
 			</div>
 
-			<paper-dropdown-menu id='blue-dropdown' label="Blue Logo Select">
+
 				<paper-listbox class='dropdown-content'>
 					<template is="dom-repeat" items="{{teams}}">
 						<paper-item> {{item.base}} </paper-item>
 					</template>
 				</paper-listbox>
 
-			</paper-dropdown-menu>
-      <paper-dropdown-menu id='red-dropdown' label="Red Logo Select">
-        <paper-listbox class='dropdown-content'>
-          <template is="dom-repeat" items="{{teams}}">
-            <paper-item> {{item.base}} </paper-item>
-          </template>
-        </paper-listbox>
 
-      </paper-dropdown-menu>
 
-	<!--		<paper-input label="Blue logo" id="blue-logo"></paper-input>
-			<paper-input label="Red logo" id="red-logo"></paper-input> -->
+			<paper-input label="Blue logo" id="blue-logo"></paper-input>
+			<paper-input label="Red logo" id="red-logo"></paper-input>
 			<paper-button raised id="addlogos">Update Logos</paper-button>
 
 			<div class="scores">
