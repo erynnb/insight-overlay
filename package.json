@@ -19,7 +19,7 @@
       {
         "name": "overlay-panel",
         "title": "Sample Panel",
-        "width": 2,
+        "width": 4,
         "headerColor": "#2d4e8a",
         "file": "overlay-panel.html"
       }

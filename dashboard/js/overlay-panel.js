@@ -10,16 +10,17 @@
 	var swapTeams = document.getElementById('swapteams');
 	var fadeIn = document.getElementById('fadein');
 	var fadeOut = document.getElementById('fadeout');
-  var addlogos = document.getElementById('addlogos');
+	var addlogos = document.getElementById('addlogos');
 
 	var switchImage = document.getElementById('switch-images');
 
 	var dashboardLogoReplicant = nodecg.Replicant('teamLogos');
 
-	var uploads;
+	var teamLogos;
+
 	var teamlogosReplicant = nodecg.Replicant('assets:teamlogos');
 
- var alert;
+	var alert;
 
 
 	addTeams.addEventListener('click', function() {
@@ -91,42 +92,46 @@
 		nodecg.sendMessage('fadeOut');
 
 	});
-/**
-*  Below is a temp logo thing. Need to implement this better.
-*/
+	/**
+	 *  Below is a temp logo thing. Need to implement this better.
+	 */
 
-addlogos.addEventListener('click', function() {
-	dashboardLogoReplicant.value = [
-		document.getElementById('blue-logo').value,
-		document.getElementById('red-logo').value
-	];
-	nodecg.sendMessage('teamLogos');
+	addlogos.addEventListener('click', function() {
+		dashboardLogoReplicant.value = [
+			//document.getElementById('blue-logo').value,
+			//document.getElementById('red-logo').value
+			document.getElementById('blue-dropdown').value,
+			document.getElementById('red-dropdown').value
+		];
+		nodecg.sendMessage('teamLogos');
 
-});
+	});
 
-switchImage.addEventListener('click', function() {
+	switchImage.addEventListener('click', function() {
 
-	nodecg.sendMessage('switchImages');
-	switchAlert = nodecg.Replicant('switchType');
-	if (switchAlert.value == "_alt") {
-		document.getElementById('alert').innerHTML = "Orignal Version";
-	} else {
-		document.getElementById('alert').innerHTML = "Alt Version";
-	}
-});
+		nodecg.sendMessage('switchImages');
+		switchAlert = nodecg.Replicant('switchType');
+		if (switchAlert.value == "_alt") {
+			document.getElementById('alert').innerHTML = "Orignal Version";
+		} else {
+			document.getElementById('alert').innerHTML = "Alt Version";
+		}
+	});
 
 
 
 	teamlogosReplicant.on('change', function(newVal, oldVal) {
-		uploads = newVal;
+		teamLogos = newVal;
+		console.log(teamLogos);
+		document.querySelector('overlay-panel').setList(teamLogos);
 	});
 
 	function updateLogos() {
 		var $list = document.querySelector('logos-list');
-		for (var i = 0; i < uploads.length; i++) {
+		for (var i = 0; i < teamLogos.length; i++) {
 			$list.addLogo({
-				url: uploads[i].url,
-				name: uploads[i].name
+				url: teamLogos[i].url,
+				name: teamLogos[i].name
 			})
 		}
 	}

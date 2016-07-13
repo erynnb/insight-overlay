@@ -1,86 +1,108 @@
 <!DOCTYPE html>
 
 <head>
-  <script src="components/webcomponentsjs/webcomponents-lite.min.js"></script>
-  <script src="components/jquery/dist/jquery.min.js"></script>
+	<script src="components/webcomponentsjs/webcomponents-lite.min.js"></script>
+	<script src="components/jquery/dist/jquery.min.js"></script>
+	<link rel="import" href="components/iron-flex-layout/iron-flex-layout-classes.html">
+	<link rel="import" href="components/polymer/polymer.html">
+	<link rel="import" href="components/paper-input/paper-input.html">
+	<link rel="import" href="components/paper-button/paper-button.html">
+	<link rel="import" href="components/paper-listbox/paper-listbox.html">
+	<link rel="import" href="components/paper-item/paper-item.html">
+	<link rel="import" href="components/paper-dropdown-menu/paper-dropdown-menu.html">
 
-  <link rel="import" href="components/polymer/polymer.html">
-  	<link rel="import" href="components/paper-input/paper-input.html">
-<link rel="import" href="components/paper-button/paper-button.html">
-<link rel="import" href="components/paper-listbox/paper-listbox.html">
-<link rel="import" href="components/paper-item/paper-item.html">
+	<style is="custom-style" include="iron-flex">
+		.flex {
+			@apply(--layout-horizontal);
+		}
+	</style>
+
 
 </head>
+
 <body>
 
-<dom-module name="overlay-panel">
+	<dom-module id="overlay-panel">
 
-<template>
-  <div class="teams">
-    <paper-input label="Blue Team" id="blue-team"> </paper-input>
-    <paper-input label="Red Team" id="red-team"></paper-input>
-    <paper-button raised id="addteams">Update Teams </paper-button>
-  </div>
+		<template>
+			<div class="teams ">
+				<paper-input label="Blue Team" id="blue-team"> </paper-input>
+				<paper-input label="Red Team" id="red-team"></paper-input>
+				<paper-button raised id="addteams">Update Teams </paper-button>
+			</div>
 
-  <paper-input label="Blue logo" id="blue-logo"> </paper-input>
-  <paper-input label="Red logo" id="red-logo"></paper-input>
-  <paper-button raised id="addlogos">Update Logos</paper-button>
+			<paper-dropdown-menu id='blue-dropdown' label="Blue Logo Select">
+				<paper-listbox class='dropdown-content'>
+					<template is="dom-repeat" items="{{teams}}">
+						<paper-item> {{item.base}} </paper-item>
+					</template>
+				</paper-listbox>
 
-  <div class = "scores">
-    <paper-input label="Blue Score" id="blue-score"> </paper-input>
-    <paper-input label="Red Score" id="red-score"></paper-input>
-    <paper-button raised id="addscores">Update Scores</paper-button>
-  </div>
-  <paper-button raised id="swapteams">Swap Sides</paper-button>
-  <paper-button raised id="fadein">FADE IN</paper-button>
-  <paper-button  raised id="fadeout">FADE OUT</paper-button>
+			</paper-dropdown-menu>
+      <paper-dropdown-menu id='red-dropdown' label="Red Logo Select">
+        <paper-listbox class='dropdown-content'>
+          <template is="dom-repeat" items="{{teams}}">
+            <paper-item> {{item.base}} </paper-item>
+          </template>
+        </paper-listbox>
+
+      </paper-dropdown-menu>
+
+	<!--		<paper-input label="Blue logo" id="blue-logo"></paper-input>
+			<paper-input label="Red logo" id="red-logo"></paper-input> -->
+			<paper-button raised id="addlogos">Update Logos</paper-button>
+
+			<div class="scores">
+				<paper-input label="Blue Score" id="blue-score"> </paper-input>
+				<paper-input label="Red Score" id="red-score"></paper-input>
+				<paper-button raised id="addscores">Update Scores</paper-button>
+			</div>
+			<paper-button raised id="swapteams">Swap Sides</paper-button>
+			<paper-button raised id="fadein">FADE IN</paper-button>
+			<paper-button raised id="fadeout">FADE OUT</paper-button>
 
 
-<paper-button raised id="switch-images"> Switch Overlay Type </paper-button>
-<div id="alert"> </div>
+			<paper-button raised id="switch-images"> Switch Overlay Type </paper-button>
+			<div id="alert"> </div>
 
-</template>
+		</template>
+		<script>
+			Polymer({
+				is: 'overlay-panel',
+				ready: function() {
+					switchAlert = nodecg.Replicant('switchType');
 
-<script>
+					teamlogosReplicant = nodecg.Replicant('assets:teamlogos');
+					self.teamlogos = [];
+					//this.teamlogos = [];
+					//console.log(this.teamlogos);
+					if (switchAlert.value == "_alt") {
+						document.getElementById('alert').innerHTML = "Alt Version";
+					} else {
+						document.getElementById('alert').innerHTML = "Orignal Version";
+					}
+					teamlogosReplicant.on('change', function(newVal, oldVal) {
+						self.teamlogos = newVal;
+						console.log(this.teamslogos);
 
-  Polymer({
-    is: 'overlay-panel',
-    ready: function() {
-      switchAlert = nodecg.Replicant('switchType');
+					});
+				},
+				setList: function(teamLogoList) {
+					this.teams = teamLogoList;
+				},
+				addLogo: function(logo) {
+					this.push('teamlogos', logo);
+				}
 
-      teamlogosReplicant = nodecg.Replicant('assets:teamlogos');
-      self.teamlogos = [];
-      //this.teamlogos = [];
-      //console.log(this.teamlogos);
-      teamlogosReplicant.on('change', function(newVal, oldVal) {
-        self.teamlogos = newVal;
+			});
+			//});
+		</script>
 
-        if (switchAlert.value == "_alt") {
-          alert = "Alt Version";
-          document.getElementById('alert').innerHTML = "Alt Version";
-        } else {
-          document.getElementById('alert').innerHTML = "Orignal Version";
-        }
+	</dom-module>
 
-      });
-    },
-    setList: function(teamLogoList) {
-    //  this.teams = teamLogoList;
-    },
-    addLogo: function(logo) {
-      //this.push('teamlogos', logo);
-    }
+	<div class="horizontal layout">
+		<overlay-panel></overlay-panel>
+	</div>
 
-  });
-//});
-
-</script>
-
-</dom-module>
-
-<div class="horizontal layout">
-	<overlay-panel></overlay-panel>
-</div>
-
-<script src="js/overlay-panel.js"></script>
-</div>
+	<script src="js/overlay-panel.js"></script>
+	</div>

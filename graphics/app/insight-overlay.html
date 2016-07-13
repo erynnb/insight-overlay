@@ -11,9 +11,9 @@
 			<div class="top" layout horizontal>
 				<div class="left" flex>
 
-					<iron-image id="left-line-top" src="../insight-overlay/img/blue_line{{type}}.png"> </iron-image>
-					<iron-image id="left-bar-top" src="../insight-overlay/img/left_bar_top{{type}}.png"> </iron-image>
-					<iron-image id="left-glow" src="../insight-overlay/img/blue_glow{{type}}.png"> </iron-image>
+					<iron-image id="left-line-top" src="../insight-overlay/img/blue_line{{imageType}}.png"> </iron-image>
+					<iron-image id="left-bar-top" src="../insight-overlay/img/left_bar_top{{imageType}}.png"> </iron-image>
+					<iron-image id="left-glow" src="../insight-overlay/img/blue_glow{{imageType}}.png"> </iron-image>
 					<iron-image id="left-logo" src="../../../assets/insight-overlay/teamlogos/{{bluelogo}}"> </iron-image>
 					<div class="blue-info">
 						<span id="blue-team-name"></span>
@@ -22,9 +22,9 @@
 				</div>
 
 				<div class="right" flex>
-					<iron-image id="right-line-top" src="../insight-overlay/img/red_line{{type}}.png"> </iron-image>
-					<iron-image id="right-bar-top" src="../insight-overlay/img/right_bar_top{{type}}.png"> </iron-image>
-					<iron-image id="right-glow" src="../insight-overlay/img/red_glow{{type}}.png"> </iron-image>
+					<iron-image id="right-line-top" src="../insight-overlay/img/red_line{{imageType}}.png"> </iron-image>
+					<iron-image id="right-bar-top" src="../insight-overlay/img/right_bar_top{{imageType}}.png"> </iron-image>
+					<iron-image id="right-glow" src="../insight-overlay/img/red_glow{{imageType}}.png"> </iron-image>
 					<iron-image id="right-logo" src="../../../assets/insight-overlay/teamlogos/{{redlogo}}"> </iron-image>
 					<div class="red-info">
 						<span id="red-team-name"> </span>
@@ -50,7 +50,7 @@
 			redname: String,
 			bluescore: String,
 			redscore: String,
-			type: String
+			imageType: String
 
 		},
 
@@ -66,7 +66,7 @@
 			var switchImages = nodecg.Replicant('switchImages');
 			var t1 = new TimelineLite();
 			var t2 = new TimelineLite();
-			self.type='';
+			self.imageType ='';
 			var switchAlert = nodecg.Replicant('switchType');
 
 			var isShowing = false;
@@ -91,8 +91,8 @@
 
 			nodecg.listenFor('switchImages', function() {
 				var t4 = new TimelineLite();
-				if (self.type == '') {
-	    	self.type='_alt';
+				if (self.imageType == '') {
+	    	self.imageType='_alt';
 				t4.to(('#blue-team-score'), 0, {
 					left: '675px'
 				}, 0);
@@ -101,7 +101,7 @@
 				}, 0);
 			}
 				else {
-					self.type = '';
+					self.imageType = '';
 					t4.to(('#blue-team-score'), 0, {
 						left: '785px'
 					}, 0);
@@ -109,7 +109,7 @@
 						right: '785px'
 					}, 0);
 				}
-				switchAlert.value = self.type;
+				switchAlert.value = self.imageType;
 
 			});
 
@@ -120,6 +120,12 @@
 			nodecg.Replicant('teamLogos').on('change', function(oldVal, newVal) {
 				self.bluelogo = teamLogos.value[0];
 				self.redlogo = teamLogos.value[1];
+				if (!teamLogos.value[0]) {
+					self.bluelogo = 'logo.png';
+				}
+				if (!teamLogos.value[1]) {
+					self.bluelogo = 'logo.png';
+				}
 			});
 
 			nodecg.listenFor('fadeIn', function() {
