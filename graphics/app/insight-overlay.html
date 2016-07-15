@@ -130,7 +130,7 @@
 
 			nodecg.listenFor('fadeIn', function() {
 				var t1 = new TimelineLite();
-
+				nodecg.playSound('scoreboard-in');
 				t1.to(('#left-line-top'), 0.5, {
 					left: '165px'
 				}, 0);
@@ -173,6 +173,8 @@
 				isShowing = true;
 			});
 			nodecg.listenFor('fadeOut', function() {
+				nodecg.playSound('scoreboard-out');
+
 				var t1 = new TimelineLite();
 
 				t1.to(('#left-line-top'), 0.5, {

@@ -38,6 +38,18 @@
         "height": 720,
         "singleInstance": false
       }
+    ],
+    "soundCues": [
+      {
+        "name": "scoreboard-in",
+        "assignable": false,
+        "defaultFile": "sound/scoreboard-in.ogg"
+      },
+      {
+        "name": "scoreboard-out",
+        "assignable": false,
+        "defaultFile": "sound/scoreboard-out.ogg"
+      }
     ]
   }
 
