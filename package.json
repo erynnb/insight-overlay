@@ -18,10 +18,17 @@
     "dashboardPanels": [
       {
         "name": "overlay-panel",
-        "title": "Sample Panel",
+        "title": "Scoreboard",
         "width": 4,
         "headerColor": "#2d4e8a",
         "file": "overlay-panel.html"
+      },
+      {
+        "name": "logo-panel",
+        "title": "Logo List",
+        "width": 2,
+        "headerColor": "#2d4e8a",
+        "file": "logo-panel.html"
       }
     ],
     "graphics": [

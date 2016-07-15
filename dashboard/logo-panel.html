@@ -22,56 +22,28 @@
 
 <body>
 
-	<dom-module id="overlay-panel">
+	<dom-module id="logo-panel">
 
-		<template>
-			<div class="teams ">
-				<paper-input label="Blue Team" id="blue-team"> </paper-input>
-				<paper-input label="Red Team" id="red-team"></paper-input>
-				<paper-button raised id="addteams">Update Teams </paper-button>
-			</div>
+    <template>
 
-<!--
 				<paper-listbox class='dropdown-content'>
 					<template is="dom-repeat" items="{{teams}}">
 						<paper-item> {{item.base}} </paper-item>
 					</template>
 				</paper-listbox>
--->
 
-			<paper-input label="Blue logo" id="blue-logo"></paper-input>
-			<paper-input label="Red logo" id="red-logo"></paper-input>
-			<paper-button raised id="addlogos">Update Logos</paper-button>
-
-			<div class="scores">
-				<paper-input label="Blue Score" id="blue-score"> </paper-input>
-				<paper-input label="Red Score" id="red-score"></paper-input>
-				<paper-button raised id="addscores">Update Scores</paper-button>
-			</div>
-			<paper-button raised id="swapteams">Swap Sides</paper-button>
-			<paper-button raised id="fadein">FADE IN</paper-button>
-			<paper-button raised id="fadeout">FADE OUT</paper-button>
-
-
-			<paper-button raised id="switch-images"> Switch Overlay Type </paper-button>
-			<div id="alert"> </div>
 
 		</template>
 		<script>
 			Polymer({
-				is: 'overlay-panel',
+				is: 'logo-panel',
 				ready: function() {
-					switchAlert = nodecg.Replicant('switchType');
 
 					teamlogosReplicant = nodecg.Replicant('assets:teamlogos');
 					self.teamlogos = [];
 					//this.teamlogos = [];
 					//console.log(this.teamlogos);
-					if (switchAlert.value == "_alt") {
-						document.getElementById('alert').innerHTML = "Alt Version";
-					} else {
-						document.getElementById('alert').innerHTML = "Orignal Version";
-					}
+
 					teamlogosReplicant.on('change', function(newVal, oldVal) {
 						self.teamlogos = newVal;
 						console.log(this.teamslogos);
@@ -92,8 +64,8 @@
 	</dom-module>
 
 	<div class="horizontal layout">
-		<overlay-panel></overlay-panel>
+		<logo-panel></logo-panel>
 	</div>
 
-	<script src="js/overlay-panel.js"></script>
+	<script src="js/logo-panel.js"></script>
 	</div>
