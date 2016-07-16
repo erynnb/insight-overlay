@@ -17,23 +17,16 @@
     ],
     "dashboardPanels": [
       {
-        "name": "overlay-panel",
+        "name": "scoreboard-control",
         "title": "Scoreboard",
         "width": 4,
         "headerColor": "#2d4e8a",
-        "file": "overlay-panel.html"
-      },
-      {
-        "name": "logo-panel",
-        "title": "Logo List",
-        "width": 2,
-        "headerColor": "#2d4e8a",
-        "file": "logo-panel.html"
+        "file": "scoreboard-control.html"
       }
     ],
     "graphics": [
       {
-        "file": "index.html",
+        "file": "scoreboard.html",
         "width": 1280,
         "height": 720,
         "singleInstance": false
@@ -52,5 +45,4 @@
       }
     ]
   }
-
 }
