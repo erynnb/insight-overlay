@@ -26,7 +26,7 @@
 				.team {
 					padding: 5px;
 				}
-				
+
 				#hide-overlay {
 					background-color: var(--paper-red-500);
 				}
@@ -44,8 +44,8 @@
 				<div class="flex team">
 					<strong>Blue Team</strong>
 
-					<paper-input label="Name" value="{{blueTeamName}}"></paper-input>
-					<paper-dropdown-menu label="Logo">
+					<paper-input label="Name" value="{{blueTeamName}}" tabindex="1"></paper-input>
+					<paper-dropdown-menu label="Logo" tabindex="3">
 					  	<paper-listbox class="dropdown-content" attr-for-selected="value" selected="{{blueTeamLogo}}">
 							<template is="dom-repeat" items="{{teamLogos}}">
 								<paper-item label="{{item.base}}" value="{{item.url}}"><iron-image height="100" width="100" sizing="contain" src="{{item.url}}"></paper-item>
@@ -53,7 +53,7 @@
 					  	</paper-listbox>
 					</paper-dropdown-menu>
 					<iron-image height="200" width="200" sizing="contain" src="{{blueTeamLogo}}"></iron-image>
-					<paper-input label="Score" type="number" value="{{blueTeamScore}}">
+					<paper-input label="Score" type="number" value="{{blueTeamScore}}" tabindex="5">
 						<paper-icon-button prefix on-tap="decrementBlueScore" icon="remove"></paper-icon-button>
 						<paper-icon-button suffix on-tap="incrementBlueScore" icon="add"></paper-icon-button>
 					</paper-input>
@@ -65,8 +65,8 @@
 				<div class="flex team">
 					<strong>Red Team</strong>
 
-					<paper-input label="Name" value="{{redTeamName}}"></paper-input>
-					<paper-dropdown-menu label="Logo">
+					<paper-input label="Name" value="{{redTeamName}}" tabindex="2"></paper-input>
+					<paper-dropdown-menu label="Logo" tabindex="4">
 					  	<paper-listbox class="dropdown-content" attr-for-selected="value" selected="{{redTeamLogo}}">
 							<template is="dom-repeat" items="{{teamLogos}}">
 								<paper-item label="{{item.base}}" value="{{item.url}}"><iron-image height="100" width="100" sizing="contain" src="{{item.url}}"></paper-item>
@@ -74,7 +74,7 @@
 					  	</paper-listbox>
 					</paper-dropdown-menu>
 					<iron-image height="200" width="200" sizing="contain" src="{{redTeamLogo}}"></iron-image>
-					<paper-input label="Score" type="number" value="{{redTeamScore}}">
+					<paper-input label="Score" type="number" value="{{redTeamScore}}" tabindex="6">
 						<paper-icon-button prefix on-tap="decrementRedScore" icon="remove"></paper-icon-button>
 						<paper-icon-button suffix on-tap="incrementRedScore" icon="add"></paper-icon-button>
 					</paper-input>
