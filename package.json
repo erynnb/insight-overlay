@@ -1,9 +1,28 @@
 {
   "name": "insight-overlay",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:TipoftheHats/toth5-overlay.git"
+  },
+  "homepage": "https://github.com/erynnb",
+  "authors": [
+    "Erin B"
+  ],
+  "scripts": {
+    "static": "eslint **/*.js **/*.html && polymer lint",
+    "test": "npm run static"
+  },
+  "description": "InSight Overlay assets",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-xo": "^0.18.2",
+    "eslint-plugin-ava": "^4.2.2",
+    "eslint-plugin-html": "^3.1.1"
+  },
   "nodecg": {
-    "compatibleRange": "~0.8.0",
-    "bundleDependencies": {
-    },
+    "compatibleRange": "~0.9.7",
     "assetCategories": [
       {
         "name": "teamlogos",
@@ -17,19 +36,18 @@
     ],
     "dashboardPanels": [
       {
-        "name": "scoreboard-control",
+        "name": "overlay",
         "title": "Scoreboard",
-        "width": 4,
         "headerColor": "#2d4e8a",
-        "file": "scoreboard-control.html"
+        "file": "scoreboard-control.html",
+        "width": 4
       }
     ],
     "graphics": [
       {
-        "file": "scoreboard.html",
-        "width": 1280,
-        "height": 720,
-        "singleInstance": false
+        "file": "index.html",
+        "width": 1920,
+        "height": 1080
       }
     ],
     "soundCues": [

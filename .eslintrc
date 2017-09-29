@@ -1,0 +1,22 @@
+{
+	"extends": "xo/esnext",
+	"plugins": [
+		"html"
+	],
+	"rules": {
+		"new-cap": [
+			2,
+			{
+				"capIsNewExceptions": [
+					"Polymer",
+					"Polymer.MutableData",
+					"Polymer.GestureEventListeners",
+					"nodecg.Replicant",
+					"e.apis.extension.Replicant",
+					"window.dashboardApi.Replicant"
+				]
+			}
+		],
+		"capitalized-comments": [0]
+	}
+}

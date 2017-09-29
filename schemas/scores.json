@@ -1,0 +1,34 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+
+	"definitions": {
+		"team": {
+			"type": "object",
+			"additionalProperties": false,
+			"properties": {
+				"score": {
+					"type": "number",
+					"multipleOf": 1.0,
+					"default": 0
+				},
+				"tag": {
+					"type": "string",
+					"default": ""
+				}
+			},
+			"required": ["score", "tag"]
+		}
+	},
+
+	"type": "object",
+	"additionalProperties": false,
+	"properties": {
+		"red": {
+			"$ref": "#/definitions/team"
+		},
+		"blu": {
+			"$ref": "#/definitions/team"
+		}
+	},
+	"required": ["red", "blu"]
+}

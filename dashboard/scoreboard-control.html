@@ -1,172 +1,89 @@
 <!DOCTYPE html>
 
 <head>
-	<link rel="import" href="components/polymer/polymer.html">
 
-	<link rel="import" href="components/iron-flex-layout/iron-flex-layout-classes.html">
-	<link rel="import" href="components/iron-icons/iron-icons.html">
-	<link rel="import" href="components/iron-image/iron-image.html">
-	<link rel="import" href="components/nodecg-replicant/nodecg-replicant.html">
-	<link rel="import" href="components/paper-button/paper-button.html">
-	<link rel="import" href="components/paper-dropdown-menu/paper-dropdown-menu.html">
-	<link rel="import" href="components/paper-icon-button/paper-icon-button.html">
-	<link rel="import" href="components/paper-input/paper-input.html">
-	<link rel="import" href="components/paper-item/paper-item.html">
-	<link rel="import" href="components/paper-listbox/paper-listbox.html">
-	<link rel="import" href="components/paper-toggle-button/paper-toggle-button.html">
-	<link rel="import" href="components/paper-styles/color.html">
+	<link rel="import" href="../bower_components/polymer/polymer.html">
 
-	<script src="components/lodash/dist/lodash.min.js"></script>
+	<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+	<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+	<link rel="import" href="../bower_components/iron-image/iron-image.html">
+	<link rel="import" href="../bower_components/nodecg-replicant/nodecg-replicant.html">
+	<link rel="import" href="../bower_components/paper-button/paper-button.html">
+	<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+	<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+	<link rel="import" href="../bower_components/paper-input/paper-input.html">
+	<link rel="import" href="../bower_components/paper-item/paper-item.html">
+	<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+	<link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
+	<link rel="import" href="../bower_components/paper-styles/color.html">
+	<link rel="import" href="../bower_components/web-animations-js/web-animations-next-lite.min.html">
+
+
 </head>
-
 <body>
 	<dom-module id="scoreboard-control">
 		<template>
-			<style is="custom-style" include="iron-flex">
+			<style include="iron-flex iron-flex-alignment">
+				:host {
+					@apply --layout-vertical;
+				}
 				.team {
 					padding: 5px;
 				}
-
-				#hide-overlay {
+				#hide {
 					background-color: var(--paper-red-500);
 				}
-
-				#show-overlay {
+				#show, #update {
 					background-color: var(--paper-green-500);
 				}
-
 				#swap-sides {
 					background-color: var(--paper-amber-500);
 				}
 			</style>
 
+
 			<div id="teams" class="horizontal layout">
 				<div class="flex team">
 					<strong>Blue Team</strong>
+					<paper-input id="bluTag" label="Name" tabindex="1"></paper-input>
+					<paper-input id="bluScore" always-float-label label="Score" type="number" style="margin-right: 8px;"></paper-input>
 
-					<paper-input label="Name" value="{{blueTeamName}}" tabindex="1"></paper-input>
 					<paper-dropdown-menu label="Logo" tabindex="3">
-					  	<paper-listbox class="dropdown-content" attr-for-selected="value" selected="{{blueTeamLogo}}">
+						<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluTeamLogo}}">
 							<template is="dom-repeat" items="{{teamLogos}}">
-								<paper-item label="{{item.base}}" value="{{item.url}}"><iron-image height="100" width="100" sizing="contain" src="{{item.url}}"></paper-item>
+								<paper-item role$="{{item.url}}"><iron-image height="100" width="100" sizing="contain" src="{{item.url}}">{{item.base}}</paper-item>
 							</template>
-					  	</paper-listbox>
+						</paper-listbox>
 					</paper-dropdown-menu>
-					<iron-image height="200" width="200" sizing="contain" src="{{blueTeamLogo}}"></iron-image>
-					<paper-input label="Score" type="number" value="{{blueTeamScore}}" tabindex="5">
-						<paper-icon-button prefix on-tap="decrementBlueScore" icon="remove"></paper-icon-button>
-						<paper-icon-button suffix on-tap="incrementBlueScore" icon="add"></paper-icon-button>
-					</paper-input>
-
-					<nodecg-replicant replicant-name="blueTeamName" value="{{blueTeamName}}"></nodecg-replicant>
-					<nodecg-replicant replicant-name="blueTeamLogo" value="{{blueTeamLogo}}"></nodecg-replicant>
-					<nodecg-replicant replicant-name="blueTeamScore" value="{{blueTeamScore}}"></nodecg-replicant>
+					<iron-image height="75" width="75" sizing="contain" src="{{bluTeamLogo}}"></iron-image>
 				</div>
+
 				<div class="flex team">
 					<strong>Red Team</strong>
+					<paper-input id="redTag" label="Name" tabindex="2"></paper-input>
+					<paper-input id="redScore" always-float-label label="Score" type="number" style="margin-right: 8px;"></paper-input>
 
-					<paper-input label="Name" value="{{redTeamName}}" tabindex="2"></paper-input>
 					<paper-dropdown-menu label="Logo" tabindex="4">
-					  	<paper-listbox class="dropdown-content" attr-for-selected="value" selected="{{redTeamLogo}}">
+						<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redTeamLogo}}">
 							<template is="dom-repeat" items="{{teamLogos}}">
-								<paper-item label="{{item.base}}" value="{{item.url}}"><iron-image height="100" width="100" sizing="contain" src="{{item.url}}"></paper-item>
-							</template>
-					  	</paper-listbox>
+								<paper-item role$="{{item.url}}"><iron-image height="100" width="100" sizing="contain" src="{{item.url}}">{{item.base}}</paper-item>
+								</template>
+							</paper-listbox>
 					</paper-dropdown-menu>
-					<iron-image height="200" width="200" sizing="contain" src="{{redTeamLogo}}"></iron-image>
-					<paper-input label="Score" type="number" value="{{redTeamScore}}" tabindex="6">
-						<paper-icon-button prefix on-tap="decrementRedScore" icon="remove"></paper-icon-button>
-						<paper-icon-button suffix on-tap="incrementRedScore" icon="add"></paper-icon-button>
-					</paper-input>
-
-					<nodecg-replicant replicant-name="redTeamName" value="{{redTeamName}}"></nodecg-replicant>
-					<nodecg-replicant replicant-name="redTeamLogo" value="{{redTeamLogo}}"></nodecg-replicant>
-					<nodecg-replicant replicant-name="redTeamScore" value="{{redTeamScore}}"></nodecg-replicant>
+					<iron-image height="75" width="75" sizing="contain" src="{{redTeamLogo}}"></iron-image>
 				</div>
 			</div>
 
-			<nodecg-replicant replicant-name="assets:teamlogos" value="{{teamLogos}}"></nodecg-replicant>
+		<nodecg-replicant replicant-name="assets:teamlogos" value="{{teamLogos}}"></nodecg-replicant>
 
-			<div class="horizontal layout">
-				<div class="flex">
-					<p><paper-button raised on-tap="switchTeams" id="swap-sides">Swap Sides</paper-button></p>
-				</div>
-				<div class="flex">
-					<p><paper-toggle-button checked="{{alternateLayout}}">Alternate Layout</paper-toggle-button></p>
-
-					<nodecg-replicant replicant-name="scoreboardAlternateLayout" value="{{alternateLayout}}"></nodecg-replicant>
-				</div>
-			</div>
-
-			<div class="horizontal layout">
-				<paper-button raised on-tap="hideOverlay" disabled="{{!visible}}" class="flex" id="hide-overlay">Hide</paper-button>
-				<paper-button raised on-tap="showOverlay" disabled="{{visible}}" class="flex" id="show-overlay">Show</paper-button>
-			</div>
-
-			<nodecg-replicant replicant-name="scoreboardVisible" value="{{visible}}"></nodecg-replicant>
-		</template>
-		<script>
-			Polymer({
-				is: 'scoreboard-control',
-				switchTeams() {
-					let newRedTeamName = this.blueTeamName;
-					let newBlueTeamName = this.redTeamName;
-					this.blueTeamName = newBlueTeamName;
-					this.redTeamName = newRedTeamName;
-
-					let newRedTeamLogo = this.blueTeamLogo;
-					let newBlueTeamLogo = this.redTeamLogo;
-					this.blueTeamLogo = newBlueTeamLogo;
-					this.redTeamLogo = newRedTeamLogo;
-
-					let newRedTeamScore = this.blueTeamScore;
-					let newBlueTeamScore = this.redTeamScore;
-					this.blueTeamScore = newBlueTeamScore;
-					this.redTeamScore = newRedTeamScore;
-				},
-				hideOverlay() {
-					this.visible = false;
-				},
-				showOverlay() {
-					this.visible = true;
-				},
-				decrementBlueScore() {
-					let score = _.toNumber(this.blueTeamScore) || 0;
-
-					if (score > 0) {
-						score--;
-					}
-
-					this.blueTeamScore = score;
-				},
-				decrementRedScore() {
-					let score = _.toNumber(this.redTeamScore) || 0;
-
-					if (score > 0) {
-						score--;
-					}
-
-					this.redTeamScore = score;
-				},
-				incrementBlueScore() {
-					let score = _.toNumber(this.blueTeamScore) || 0;
-
-					score++;
-
-					this.blueTeamScore = score;
-				},
-				incrementRedScore() {
-					let score = _.toNumber(this.redTeamScore) || 0;
-
-					score++;
-
-					this.redTeamScore = score;
-				}
-			});
-		</script>
+		<div class="horizontal layout">
+			<paper-button raised id="show" on-tap="showOverlay">Show</paper-button>
+			<paper-button raised id="update" on-tap="update">Update</paper-button>
+			<paper-button raised id="hide" on-tap="hideOverlay">Hide</paper-button>
+			<paper-button raised on-tap="switchTeams" id="swap-sides">Swap Sides</paper-button>
+		</div>
+	</template>
+	<script src="scoreboard-control.js"></script>
 	</dom-module>
-
-	<div class="horizontal layout">
-		<scoreboard-control></scoreboard-control>
-	</div>
-</div>
+</body>
+<scoreboard-control></scoreboard-control>

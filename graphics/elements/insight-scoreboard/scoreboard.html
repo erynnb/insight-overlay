@@ -1,0 +1,143 @@
+<link rel="import" href="../../../bower_components/nodecg-replicant/nodecg-replicant.html">
+<link rel="import" href="../../../bower_components/iron-image/iron-image.html">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/plugins/TextPlugin.min.js"></script>
+
+
+<dom-module id="insight-scoreboard">
+	<template>
+			<style>
+			:host {
+				display: flex;
+				width: 1920px;
+			}
+				.bar {
+					position: fixed;
+					top: 0;
+					z-index: 0;
+					height: 39px; /* fix for blizzard changing their ui */
+				}
+				.glow {
+					position: fixed;
+					top: 0;
+					z-index: 5;
+					height: 39px; /* fix for blizzard changing their ui */
+				}
+				.line {
+					position: fixed;
+					top: 0;
+					z-index: 10;
+				}
+				.logo {
+  				  	height: 39px;
+  				  	opacity: 0;
+  				  	position: fixed;
+  				  	top: 0;
+  						z-index: 20;
+				}
+				.logo.visible {
+					opacity: 1;
+				}
+				.team-info .logo {
+					width: 570px;
+				}
+				.text {
+					z-index: 20;
+				}
+				.name {
+					color: white;
+				  font-family: BigNoodle;
+				  font-size: 35px;
+				  letter-spacing: 1.5px;
+				  line-height: 0.8;
+					opacity: 0;
+					position: fixed;
+					top: 10px;
+				}
+				.name.visible {
+					opacity: 1;
+				}
+				.score {
+					color: white;
+				  font-family: LemonMilk;
+				  font-size: 28px;
+					font-style: italic;
+					opacity: 0;
+					position: fixed;
+				  top: 10px;
+				  transform: matrix(1, 0,0, 1.2, 0, 0);
+				}
+				.score.visible {
+					opacity: 1;
+				}
+				#blue-team .line, #blue-team .bar, #blue-team .glow {
+					left: -900px;
+				}
+				#blue-team .line.visible {
+					left: 165px;
+				}
+				#blue-team .bar.visible, #blue-team .glow.visible {
+					left: 0;
+				}
+				#blue-team .logo {
+					left: 140px;
+				}
+				#blue-team .team-info .score {
+					left: 675px;
+				}
+				#blue-team .name {
+					left: 235px;
+				}
+				#red-team .line, #red-team .bar, #red-team .glow {
+					right: -900px;
+				}
+				#red-team .line.visible {
+					right: 165px;
+				}
+				#red-team .bar.visible, #red-team .glow.visible {
+					right: 0;
+				}
+				#red-team .logo {
+					right: 140px;
+				}
+				#red-team .team-info .score {
+					right: 675px;
+				}
+				#red-team .name {
+					right: 235px;
+				}
+			</style>
+
+					<nodecg-replicant replicant-name="bluTeamLogo" value="{{bluTeamLogo}}"></nodecg-replicant>
+					<nodecg-replicant replicant-name="redTeamLogo" value="{{redTeamLogo}}"></nodecg-replicant>
+
+			<div class="layout horizontal">
+				<div id="blue-team" class="flex">
+					<div class="team-info">
+						<iron-image class="line" src="[[importPath]]/img/blue_line_alt.png"></iron-image>
+						<iron-image class="bar" src="[[importPath]]/img/left_bar_top_alt.png"></iron-image>
+						<iron-image class="glow" src="[[importPath]]/img/blue_glow_alt.png"></iron-image>
+						<iron-image class="logo blue-logo" position="left" sizing="contain" src="{{bluTeamLogo}}"></iron-image>
+						<div class="text">
+							<span id="blue-name" class="name"></span>
+							<span class="score blue-score">{{blueTeamScore}}</span>
+						</div>
+					</div>
+				</div>
+
+				<div id="red-team" class="flex">
+					<div class="team-info">
+						<iron-image class="line" src="[[importPath]]/img/red_line_alt.png"></iron-image>
+						<iron-image class="bar" src="[[importPath]]/img/right_bar_top_alt.png"></iron-image>
+						<iron-image class="glow" src="[[importPath]]/img/red_glow_alt.png"></iron-image>
+						<iron-image class="logo" position="right" sizing="contain" src="{{redTeamLogo}}"></iron-image>
+						<div class="text">
+							<span id="red-name" class="name"></span>
+							<span class="score">{{redTeamScore}}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</template>
+
+	<script src="scoreboard.js"></script>
+</dom-module>

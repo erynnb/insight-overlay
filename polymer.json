@@ -1,0 +1,14 @@
+{
+	"lint": {
+		"rules": ["polymer-2"],
+		"ignoreWarnings": [
+			"unknown-superclass"
+		]
+	},
+	"sources": [
+		"graphics/**/*",
+		"dashboard/**/*",
+		"shared/**/*",
+		"bower.json"
+	]
+}
