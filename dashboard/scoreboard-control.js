@@ -1,10 +1,18 @@
-(function () {
+(function() {
 	'use strict';
 
 	const bluTeamLogo = nodecg.Replicant('bluTeamLogo');
 	const redTeamLogo = nodecg.Replicant('redTeamLogo');
 	const scoreboardVisible = nodecg.Replicant('scoreboardVisible');
 	const scores = nodecg.Replicant('scores');
+	const scoreboardMode = nodecg.Replicant('scoreboardMode', {
+		defaultValue: false,
+		persistent: true
+	});
+	const attackDefend = nodecg.Replicant('attackDefend', {
+		defaultValue: 'blue',
+		persistent: true
+	});
 
 	class ScoreboardControl extends Polymer.MutableData(Polymer.Element) {
 		static get is() {
@@ -25,6 +33,7 @@
 					this.$.hide.setAttribute('disabled', 'true');
 				}
 			});
+
 			scores.on('change', newVal => {
 				this.$.bluScore.value = newVal.blu.score;
 				this.$.bluTag.value = newVal.blu.tag;
@@ -74,6 +83,18 @@
 					tag: this.$.bluTag.value
 				}
 			};
+		}
+		_enableAttackDefend() {
+			scoreboardMode.value = this._adMode;
+			console.log(this._adMode);
+		}
+		_whoAttacks() {
+			if (this._attacks === true) {
+				attackDefend.value = 'red';
+			} else {
+				console.log('blue attacks');
+				attackDefend.value = 'blue';
+			}
 		}
 	}
 

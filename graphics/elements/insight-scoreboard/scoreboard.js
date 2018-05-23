@@ -1,9 +1,9 @@
 /* global SteppedEase */
-(function () {
+(function() {
 	'use strict';
 
-	const scoreboardVisible = nodecg.Replicant('scoreboardVisible');
 	const scores = nodecg.Replicant('scores');
+	const scoreboardVisible = nodecg.Replicant('scoreboardVisible');
 
 	class InsightScoreboard extends Polymer.Element {
 		static get is() {
@@ -28,6 +28,14 @@
 					type: Number,
 					default: 0
 				},
+				attackDefend: {
+					type: String,
+					observer: '_statusChange'
+				},
+				scoreboardMode: {
+					type: Boolean,
+					observer: '_enableAttackDefend'
+				},
 				visible: {
 					type: Boolean,
 					value: false,
@@ -37,7 +45,9 @@
 					type: TimelineLite,
 					readOnly: true,
 					value() {
-						return new TimelineLite({autoRemoveChildren: true});
+						return new TimelineLite({
+							autoRemoveChildren: true
+						});
 					}
 				}
 			};
@@ -46,7 +56,6 @@
 		ready() {
 			super.ready();
 			this.initialized = false;
-
 			scores.on('change', newVal => {
 				if (!newVal) {
 					return;
@@ -62,13 +71,64 @@
 			});
 		}
 
-		_blueTeamNameChanged(newVal) {
-			TweenLite.to(this.$['blue-name'], 0.2, {text: newVal});
+		_blueTeamNameChanged(newVal, oldVal) {
+			const blueName = this.shadowRoot.querySelector('#blue-name');
+			TweenLite.to(blueName, 0.2, {
+				text: newVal
+			});
 		}
 		_redTeamNameChanged(newVal) {
-			TweenLite.to(this.$['red-name'], 0.2, {text: newVal});
+			const redName = this.shadowRoot.querySelector('#red-name');
+			TweenLite.to(redName, 0.2, {
+				text: newVal
+			});
 		}
+		_enableAttackDefend(newVal) {
+			console.log(newVal);
+			if (this.visible) {
+				const status = Array.from(this.shadowRoot.querySelectorAll('.attack-defend'));
+				const tabs = Array.from(this.shadowRoot.querySelectorAll('.tab'));
 
+				if (newVal === false) {
+					this.timeline.to(status, 0.1, {
+						className: '-=visible'
+					});
+					this.timeline.fromTo(tabs, 0.2, {
+						className: '+=visible'
+					}, {
+						className: '-=visible'
+					}, 0.2);
+				} else {
+					this.timeline.to(status, 0.3, {
+						className: '+=visible'
+					}, 0.5);
+					this.timeline.fromTo(tabs, 0.1, {
+						className: '-=visible'
+					}, {
+						className: '+=visible'
+					}, 0);
+				}
+			}
+		}
+		_statusChange(newVal) {
+			const adBlue = this.shadowRoot.querySelector('.attack-defend-blue');
+			const adRed = this.shadowRoot.querySelector('.attack-defend-red');
+			if (this.attackDefend === 'red') {
+				TweenLite.set(adBlue, {
+					backgroundImage: 'url(./elements/insight-scoreboard/img/shield.png)'
+				});
+				TweenLite.set(adRed, {
+					backgroundImage: 'url(./elements/insight-scoreboard/img/swords.png)'
+				});
+			} else {
+				TweenLite.set(adRed, {
+					backgroundImage: 'url(./elements/insight-scoreboard/img/shield.png)'
+				});
+				TweenLite.set(adBlue, {
+					backgroundImage: 'url(./elements/insight-scoreboard/img/swords.png)'
+				});
+			}
+		}
 		_visibleChanged(newVal, oldVal) {
 			if ((oldVal === null) && this.initialized) {
 				return;
@@ -81,8 +141,27 @@
 			const scores = Array.from(this.shadowRoot.querySelectorAll('.score'));
 			const blueName = this.shadowRoot.querySelector('#blue-name');
 			const redName = this.shadowRoot.querySelector('#red-name');
+			const adBlue = this.shadowRoot.querySelector('.attack-defend-blue');
+			const adRed = this.shadowRoot.querySelector('.attack-defend-red');
+			const status = Array.from(this.shadowRoot.querySelectorAll('.attack-defend'));
+			const tabs = Array.from(this.shadowRoot.querySelectorAll('.tab'));
 
 			this.initialized = true;
+			if (this.attackDefend === 'red') {
+				TweenLite.set(adBlue, {
+					backgroundImage: 'url(./elements/insight-scoreboard/img/shield.png)'
+				});
+				TweenLite.set(adRed, {
+					backgroundImage: 'url(./elements/insight-scoreboard/img/swords.png)'
+				});
+			} else {
+				TweenLite.set(adRed, {
+					backgroundImage: 'url(./elements/insight-scoreboard/img/shield.png)'
+				});
+				TweenLite.set(adBlue, {
+					backgroundImage: 'url(./elements/insight-scoreboard/img/swords.png)'
+				});
+			}
 
 			if (!oldVal && newVal) {
 				nodecg.playSound('scoreboard-in');
@@ -136,6 +215,19 @@
 				}, {
 					className: '+=visible'
 				}, 2);
+
+				if (this.scoreboardMode === true) {
+					this.timeline.fromTo(tabs, 0.4, {
+						className: '-=visible'
+					}, {
+						className: '+=visible'
+					}, 0.45);
+					this.timeline.fromTo(status, 1, {
+						className: '-=visible'
+					}, {
+						className: '+=visible'
+					}, 2.0);
+				}
 			} else if (oldVal && !newVal) {
 				nodecg.playSound('scoreboard-out');
 				this.timeline.fromTo(scores, 0.2, {
@@ -184,6 +276,14 @@
 				}, {
 					className: '-=visible'
 				}, 1.1);
+				this.timeline.fromTo(tabs, 0.2, {
+					className: '+=visible'
+				}, {
+					className: '-=visible'
+				}, 0.9);
+				this.timeline.to(status, 0.1, {
+					className: '-=visible'
+				}, 0);
 			}
 		}
 	}

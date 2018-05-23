@@ -39,6 +39,14 @@
 				#swap-sides {
 					background-color: var(--paper-amber-500);
 				}
+				#attack-toggle {
+					--paper-toggle-button-checked-bar-color:  var(--paper-pink-500);
+					--paper-toggle-button-checked-button-color:  var(--paper-pink-500);
+					--paper-toggle-button-checked-ink-color: var(--paper-pink-500);
+					--paper-toggle-button-unchecked-bar-color:  var(--paper-indigo-900);
+					--paper-toggle-button-unchecked-button-color:  var(--paper-indigo-900);
+					--paper-toggle-button-unchecked-ink-color: var(--paper-indigo-900);
+				}
 			</style>
 
 
@@ -47,7 +55,6 @@
 					<strong>Blue Team</strong>
 					<paper-input id="bluTag" label="Name" tabindex="1"></paper-input>
 					<paper-input id="bluScore" always-float-label label="Score" type="number" style="margin-right: 8px;"></paper-input>
-
 					<paper-dropdown-menu label="Logo" tabindex="3">
 						<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluTeamLogo}}">
 							<template is="dom-repeat" items="{{teamLogos}}">
@@ -62,7 +69,6 @@
 					<strong>Red Team</strong>
 					<paper-input id="redTag" label="Name" tabindex="2"></paper-input>
 					<paper-input id="redScore" always-float-label label="Score" type="number" style="margin-right: 8px;"></paper-input>
-
 					<paper-dropdown-menu label="Logo" tabindex="4">
 						<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redTeamLogo}}">
 							<template is="dom-repeat" items="{{teamLogos}}">
@@ -75,7 +81,21 @@
 			</div>
 
 		<nodecg-replicant replicant-name="assets:teamlogos" value="{{teamLogos}}"></nodecg-replicant>
+		<div  class="horizontal layout">
+			<p>A/D Mode</p>
+			<paper-toggle-button id="ad-toggle" checked="{{_adMode}}" on-change="_enableAttackDefend"></paper-toggle-button>
 
+		</div>
+		<div class="horizontal layout">
+
+
+			<p>Blue Attacks</p>
+			<paper-toggle-button id="attack-toggle" checked="{{_attacks}}" on-change="_whoAttacks"></paper-toggle-button>
+			<p>Red Attacks</p>
+
+		</div>
+
+		<br />
 		<div class="horizontal layout">
 			<paper-button raised id="show" on-tap="showOverlay">Show</paper-button>
 			<paper-button raised id="update" on-tap="update">Update</paper-button>

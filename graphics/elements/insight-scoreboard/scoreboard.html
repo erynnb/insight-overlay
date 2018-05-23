@@ -1,7 +1,7 @@
 <link rel="import" href="../../../bower_components/nodecg-replicant/nodecg-replicant.html">
 <link rel="import" href="../../../bower_components/iron-image/iron-image.html">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/plugins/TextPlugin.min.js"></script>
-
+<link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
 
 <dom-module id="insight-scoreboard">
 	<template>
@@ -12,27 +12,69 @@
 			}
 				.bar {
 					position: fixed;
-					top: 0;
+					top: 14px;
 					z-index: 0;
-					height: 39px; /* fix for blizzard changing their ui */
+					height: 45px; /* fix for blizzard changing their ui */
+				}
+				.bar-blue {
+					clip-path: polygon(0 0, 98.7% 0, 97% 100%, 0% 100%);  /*because I don't know how to do this in photoshop*/
+				}
+				.line-blue {
+					clip-path: polygon(0 0, 98% 0, 97.7% 100%, 0% 100%);
+
+				}
+				.bar-red {
+					clip-path: polygon(1.3% 0, 100% 0, 100% 100%, 3% 100%);
+				}
+				.line-red {
+					clip-path: polygon(2% 0, 100% 0, 100% 100%, 2.4% 100%);
+				}
+				.tab {
+					height: 45px;
+					position: fixed;
+					top: 14px;
+					opacity:0;
+				}
+				.blue_tab {
+					left: -900px;
+
+				    /*left: 695px;*/
+					clip-path: polygon(19% 0%, 100% 0%, 81% 100%, 0% 100%);
+
+				}
+				.red_tab {
+					right: -900px;
+
+					/*right: 695px;*/
+					clip-path: polygon(0 0, 81% 0, 100% 100%, 19% 100%);
+
+				}
+				.red_tab.visible {
+					right: 695px;
+				}
+				.blue_tab.visible {
+					left: 695px;
+				}
+				.tab.visible, .tab.visible {
+					opacity:1;
 				}
 				.glow {
 					position: fixed;
-					top: 0;
+					top: 14px;
 					z-index: 5;
-					height: 39px; /* fix for blizzard changing their ui */
+					height: 45px; /* fix for blizzard changing their ui */
 				}
 				.line {
 					position: fixed;
-					top: 0;
+					top: 14.2px;
 					z-index: 10;
 				}
 				.logo {
-  				  	height: 39px;
+  				  	height: 45px;
   				  	opacity: 0;
   				  	position: fixed;
-  				  	top: 0;
-  						z-index: 20;
+					top: 14px;
+  					z-index: 20;
 				}
 				.logo.visible {
 					opacity: 1;
@@ -51,19 +93,22 @@
 				  line-height: 0.8;
 					opacity: 0;
 					position: fixed;
-					top: 10px;
+					top: 26px;
 				}
 				.name.visible {
 					opacity: 1;
 				}
 				.score {
 					color: white;
-				  font-family: LemonMilk;
-				  font-size: 28px;
+				  /*font-family: LemonMilk;*/
+				  font-family: 'Unica One', cursive;
+
+				  font-size: 30px;
 					font-style: italic;
+					font-weight:600;
 					opacity: 0;
 					position: fixed;
-				  top: 10px;
+					top: 21px;
 				  transform: matrix(1, 0,0, 1.2, 0, 0);
 				}
 				.score.visible {
@@ -73,16 +118,18 @@
 					left: -900px;
 				}
 				#blue-team .line.visible {
-					left: 165px;
+					/*left: 165.5px;*/
+					left: 146.5px;
 				}
 				#blue-team .bar.visible, #blue-team .glow.visible {
-					left: 0;
+					/*left: 0; */
+					left: -19px;
 				}
 				#blue-team .logo {
 					left: 140px;
 				}
 				#blue-team .team-info .score {
-					left: 675px;
+					left: 655px;
 				}
 				#blue-team .name {
 					left: 235px;
@@ -91,48 +138,89 @@
 					right: -900px;
 				}
 				#red-team .line.visible {
-					right: 165px;
+				/*	right: 163.5px; */
+					right: 144.5px;
 				}
 				#red-team .bar.visible, #red-team .glow.visible {
-					right: 0;
+					/*right: 0;*/
+					right:-19px;
 				}
 				#red-team .logo {
 					right: 140px;
 				}
 				#red-team .team-info .score {
-					right: 675px;
+					right: 655px;
 				}
 				#red-team .name {
 					right: 235px;
+				}
+				.attack-defend-blue {
+					height:25px;
+					width:25px;
+					background-size: contain;
+					position:absolute;
+					left:716px;
+					opacity:0;
+					top: 28px;
+				}
+				.attack-defend-red {
+					height:25px;
+					width:25px;
+					background-size: contain;
+					position:absolute;
+					right:716px;
+					opacity:0;
+					top: 28px;
+
+				}
+				.attack-defend-blue.visible, .attack-defend-red.visible {
+					opacity:0.9;
+				}
+				.defend {
+					background-image: url("img/shield.svg");
+
+				}
+				.attack {
+					background-image: url("img/swords.svg");
+
 				}
 			</style>
 
 					<nodecg-replicant replicant-name="bluTeamLogo" value="{{bluTeamLogo}}"></nodecg-replicant>
 					<nodecg-replicant replicant-name="redTeamLogo" value="{{redTeamLogo}}"></nodecg-replicant>
+					<nodecg-replicant replicant-name="scoreboardMode" value="{{scoreboardMode}}"></nodecg-replicant>
+					<nodecg-replicant replicant-name="attackDefend" value="{{attackDefend}}"></nodecg-replicant>
 
 			<div class="layout horizontal">
 				<div id="blue-team" class="flex">
 					<div class="team-info">
-						<iron-image class="line" src="[[importPath]]/img/blue_line_alt.png"></iron-image>
-						<iron-image class="bar" src="[[importPath]]/img/left_bar_top_alt.png"></iron-image>
+						<iron-image class="line line-blue" src="[[importPath]]/img/blue_line_alt.png"></iron-image>
+						<iron-image class="bar bar-blue" src="[[importPath]]/img/left_bar_top_alt.png"></iron-image>
 						<iron-image class="glow" src="[[importPath]]/img/blue_glow_alt.png"></iron-image>
 						<iron-image class="logo blue-logo" position="left" sizing="contain" src="{{bluTeamLogo}}"></iron-image>
 						<div class="text">
 							<span id="blue-name" class="name"></span>
 							<span class="score blue-score">{{blueTeamScore}}</span>
 						</div>
+							<iron-image class="tab blue_tab" src="[[importPath]]/img/blue_tab.png"></iron-image>
+							<div class="attack-defend attack-defend-blue">
+							</div>
 					</div>
+
 				</div>
 
 				<div id="red-team" class="flex">
 					<div class="team-info">
-						<iron-image class="line" src="[[importPath]]/img/red_line_alt.png"></iron-image>
-						<iron-image class="bar" src="[[importPath]]/img/right_bar_top_alt.png"></iron-image>
+						<iron-image class="line line-red" src="[[importPath]]/img/red_line_alt.png"></iron-image>
+						<iron-image class="bar bar-red" src="[[importPath]]/img/right_bar_top_alt.png"></iron-image>
 						<iron-image class="glow" src="[[importPath]]/img/red_glow_alt.png"></iron-image>
 						<iron-image class="logo" position="right" sizing="contain" src="{{redTeamLogo}}"></iron-image>
 						<div class="text">
 							<span id="red-name" class="name"></span>
 							<span class="score">{{redTeamScore}}</span>
+						</div>
+						<iron-image class="tab red_tab" src="[[importPath]]/img/red_tab.png"></iron-image>
+						<div class="attack-defend attack-defend-red">
 						</div>
 					</div>
 				</div>

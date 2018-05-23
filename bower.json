@@ -1,7 +1,7 @@
 {
   "name": "insight-overlay",
   "dependencies": {
-    "gsap": "~1.18.5",
+    "gsap": "1.20.4",
     "jquery": "^3.0.0",
     "letteringjs": "0.7.0",
     "iron-image": "PolymerElements/iron-image#^2.0.0",
