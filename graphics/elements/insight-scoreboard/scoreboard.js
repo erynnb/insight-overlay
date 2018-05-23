@@ -276,9 +276,7 @@
 				}, {
 					className: '-=visible'
 				}, 1.1);
-				this.timeline.fromTo(tabs, 0.2, {
-					className: '+=visible'
-				}, {
+				this.timeline.to(tabs, 0.2, {
 					className: '-=visible'
 				}, 0.9);
 				this.timeline.to(status, 0.1, {
