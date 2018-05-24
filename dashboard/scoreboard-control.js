@@ -86,13 +86,11 @@
 		}
 		_enableAttackDefend() {
 			scoreboardMode.value = this._adMode;
-			console.log(this._adMode);
 		}
 		_whoAttacks() {
 			if (this._attacks === true) {
 				attackDefend.value = 'red';
 			} else {
-				console.log('blue attacks');
 				attackDefend.value = 'blue';
 			}
 		}

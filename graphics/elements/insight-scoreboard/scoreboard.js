@@ -84,7 +84,6 @@
 			});
 		}
 		_enableAttackDefend(newVal) {
-			console.log(newVal);
 			if (this.visible) {
 				const status = Array.from(this.shadowRoot.querySelectorAll('.attack-defend'));
 				const tabs = Array.from(this.shadowRoot.querySelectorAll('.tab'));
