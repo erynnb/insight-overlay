@@ -12,7 +12,7 @@
 			}
 				.bar {
 					position: fixed;
-					top: 14px;
+					top: 0px;
 					z-index: 0;
 					height: 45px; /* fix for blizzard changing their ui */
 				}
@@ -32,7 +32,7 @@
 				.tab {
 					height: 45px;
 					position: fixed;
-					top: 14px;
+					top: 0px;
 					opacity:0;
 					z-index: -1;
 				}
@@ -51,30 +51,30 @@
 
 				}
 				.red_tab.visible {
-					right: 693px;
+					right: 697px; /*does this need to be .5??? */
 				}
 				.blue_tab.visible {
-					left: 695px;
+					left: 697px;
 				}
 				.tab.visible, .tab.visible {
 					opacity:1;
 				}
 				.glow {
 					position: fixed;
-					top: 14px;
+					top: 0px;
 					z-index: 5;
 					height: 45px; /* fix for blizzard changing their ui */
 				}
 				.line {
 					position: fixed;
-					top: 14.2px;
+					top: 0px;
 					z-index: 10;
 				}
 				.logo {
   				  	height: 45px;
   				  	opacity: 0;
   				  	position: fixed;
-					top: 14px;
+					top: 0px;
   					z-index: 20;
 				}
 				.logo.visible {
@@ -94,7 +94,7 @@
 				  line-height: 0.8;
 					opacity: 0;
 					position: fixed;
-					top: 26px;
+					top: 12px;
 				}
 				.name.visible {
 					opacity: 1;
@@ -109,7 +109,7 @@
 					font-weight:600;
 					opacity: 0;
 					position: fixed;
-					top: 21px;
+					top: 7px;
 				  transform: matrix(1, 0,0, 1.2, 0, 0);
 				}
 				.score.visible {
@@ -120,11 +120,11 @@
 				}
 				#blue-team .line.visible {
 					/*left: 165.5px;*/
-					left: 146.5px;
+					left: 148px;
 				}
 				#blue-team .bar.visible, #blue-team .glow.visible {
 					/*left: 0; */
-					left: -19px;
+					left: -18px;
 				}
 				#blue-team .logo {
 					left: 140px;
@@ -140,11 +140,11 @@
 				}
 				#red-team .line.visible {
 				/*	right: 163.5px; */
-					right: 144.5px;
+					right: 148.5px;
 				}
 				#red-team .bar.visible, #red-team .glow.visible {
 					/*right: 0;*/
-					right:-19px;
+					right:-15px;
 				}
 				#red-team .logo {
 					right: 140px;
@@ -160,18 +160,18 @@
 					width:25px;
 					background-size: contain;
 					position:absolute;
-					left:716px;
+					left:718px;
 					opacity:0;
-					top: 28px;
+					top: 13px;
 				}
 				.attack-defend-red {
 					height:25px;
 					width:25px;
 					background-size: contain;
 					position:absolute;
-					right:714px;
+					right:718px;
 					opacity:0;
-					top: 28px;
+					top: 13px;
 
 				}
 				.attack-defend-blue.visible, .attack-defend-red.visible {
