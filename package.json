@@ -2,7 +2,7 @@
   "name": "insight-overlay",
   "repository": {
     "type": "git",
-    "url": "git@github.com:TipoftheHats/toth5-overlay.git"
+    "url": "git@github.com:erynnb/insight-overlay.git"
   },
   "homepage": "https://github.com/erynnb",
   "authors": [
@@ -41,6 +41,13 @@
         "headerColor": "#2d4e8a",
         "file": "scoreboard-control.html",
         "width": 4
+      },
+      {
+        "name": "roster-breakdown",
+        "title": "Rosters",
+        "headerColor": "#2d4e8a",
+        "file": "roster-control.html",
+        "width": 6
       }
     ],
     "graphics": [
