@@ -1,0 +1,168 @@
+<link rel="import" href="../../../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/plugins/TextPlugin.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Unica+One" rel="stylesheet">
+
+<dom-module id="insight-roster">
+	<template>
+			<style include="iron-flex iron-flex-alignment">
+			:host {}
+			.blue-team {
+				position:relative;
+				width: 1600px;
+				margin:auto;
+				padding-top:350px;
+			}
+			.player-card {
+				width:260px;
+				position:relative;
+			}
+
+			.class-portrait-box {
+				width:304px;
+				height:281px;
+				position:absolute;
+				left: -1900px;
+			}
+			.class-portrait-box.visible {
+				left:0;
+			}
+			.class-portrait-roster {
+				position:relative;
+				width:262px;
+				height:100px;
+				top:290px;
+				right: 1900px; /*right 15px */
+			}
+			.class-portrait-roster.visible {
+				right:15px; /*right 15px */
+
+			}
+			.class-portrait-image {
+				width:604px;
+				height: 240px;
+				position:absolute;
+				top:41px;
+				left: -121px;
+				opacity:0;
+			}
+			.class-portrait-image.visible {
+				opacity:1;
+			}
+			.player2 .class-portrait-box {
+				position:absolute;
+			}
+			.player-role {
+				z-index:10;
+				width:50px;
+				height:50px;
+				position:relative;
+				left:60px;
+				top:-90px;
+			}
+			.player-role .role-image {
+				z-index:10;
+				width:50px;
+				height:50px;
+				opacity:0;
+			}
+			.player-role .role-image.visible {
+				opacity:1;
+			}
+			.player-name {
+				color:white;
+				position:relative;
+				top:169px;
+				font-size: 30px;
+				width:450px;
+				text-align:center;
+				opacity: 0;
+				font-family: 'Unica One', cursive;
+				left:-110px;
+
+			}
+			.player-name.visible {
+				opacity:1;
+			}
+			.team-name {
+				position:absolute;
+				width:530px;
+				height:100px;
+				top:240px;
+				left:-900px;
+			}
+			.team-name.visible {
+				left:55px;
+			}
+			.team-name-image {
+				width:530px;
+				height:100px;
+				opacity:0;
+			}
+			.team-name-image.visible {
+				opacity: 0.9
+			}
+			.team-name p {
+				color:white;
+				position:absolute;
+				top:3px;
+				font-size: 30px;
+				text-align:center;
+				left:30px;
+				font-family: BigNoodle;
+				opacity:0;
+				letter-spacing: 2px;
+
+			}
+			.team-name p.visible {
+				opacity:1;
+			}
+			</style>
+
+<div class="blue-team layout horizontal justified" >
+	<div class="team-name">
+		<iron-image class="team-name-image" sizing="contain" src="[[importPath]]/img/block.png"></iron-image>
+		<p></p>
+	</div>
+	<div class="player-card player1 ">
+			<iron-image class="class-portrait-box" sizing="contain" src="[[importPath]]/img/[[player1class]].png"></iron-image>
+			<iron-image class="class-portrait-roster" sizing="contain" src="[[importPath]]/img/[[rosterActive]].png"></iron-image>
+		<div class="player-role"><iron-image class="role-image" sizing="contain" src="[[importPath]]/img/[[player1role]].png"></iron-image></div>
+		<div class="player-name"></div>
+	</div>
+	<div class="player-card player2">
+		<iron-image class="class-portrait-box" sizing="contain" src="[[importPath]]/img/[[player2class]].png"></iron-image>
+		<iron-image class="class-portrait-roster" sizing="contain" src="[[importPath]]/img/[[rosterActive]].png"></iron-image>
+	<div class="player-role"><iron-image class="role-image" sizing="contain" src="[[importPath]]/img/[[player2role]].png"></iron-image></div>
+	<div class="player-name"></div>
+	</div>
+	<div class="player-card player3">
+		<iron-image class="class-portrait-box" sizing="contain" src="[[importPath]]/img/[[player3class]].png"></iron-image>
+		<iron-image class="class-portrait-roster" sizing="contain" src="[[importPath]]/img/[[rosterActive]].png"></iron-image>
+		<div class="player-role"><iron-image class="role-image" sizing="contain" src="[[importPath]]/img/[[player3role]].png"></iron-image></div>
+	<div class="player-name"></div>
+	</div>
+	<div class="player-card player4">
+		<iron-image class="class-portrait-box" sizing="contain" src="[[importPath]]/img/[[player4class]].png"></iron-image>
+		<iron-image class="class-portrait-roster" sizing="contain" src="[[importPath]]/img/[[rosterActive]].png"></iron-image>
+		<div class="player-role"><iron-image class="role-image" sizing="contain" src="[[importPath]]/img/[[player4role]].png"></iron-image></div>
+	<div class="player-name"></div>
+	</div>
+	<div class="player-card player5">
+		<iron-image class="class-portrait-box" sizing="contain" src="[[importPath]]/img/[[player5class]].png"></iron-image>
+		<iron-image class="class-portrait-roster" sizing="contain" src="[[importPath]]/img/[[rosterActive]].png"></iron-image>
+		<div class="player-role"><iron-image class="role-image" sizing="contain" src="[[importPath]]/img/[[player5role]].png"></iron-image></div>
+	<div class="player-name"></div>
+	</div>
+	<div class="player-card player6">
+		<iron-image class="class-portrait-box" sizing="contain" src="[[importPath]]/img/[[player6class]].png"></iron-image>
+		<iron-image class="class-portrait-roster" sizing="contain" src="[[importPath]]/img/[[rosterActive]].png"></iron-image>
+		<div class="player-role"><iron-image class="role-image" sizing="contain" src="[[importPath]]/img/[[player6role]].png"></iron-image></div>
+	<div class="player-name"></div>
+	</div>
+</div>
+
+</template>
+	<script src="roster.js"></script>
+</dom-module>

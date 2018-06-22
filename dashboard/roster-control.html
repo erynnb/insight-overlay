@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<head>
+
+	<link rel="import" href="../bower_components/polymer/polymer.html">
+
+	<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+	<link rel="import" href="../bower_components/paper-button/paper-button.html">
+	<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+	<link rel="import" href="../bower_components/paper-input/paper-input.html">
+	<link rel="import" href="../bower_components/paper-item/paper-item.html">
+	<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+	<link rel="import" href="../bower_components/paper-toggle-button/paper-toggle-button.html">
+	<link rel="import" href="../bower_components/paper-styles/color.html">
+	<link rel="import" href="../bower_components/web-animations-js/web-animations-next-lite.min.html">
+
+	<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+
+
+</head>
+<body>
+	<dom-module id="roster-control">
+		<template>
+			<style include="iron-flex iron-flex-alignment">
+				:host {
+					@apply --layout-vertical;
+				}
+				.team {
+					margin:5px;
+				}
+				#hide {
+					background-color: var(--paper-red-500);
+				}
+				#show {
+					background-color: var(--paper-green-500);
+				}
+				#rosterToggle {
+					--paper-toggle-button-checked-bar-color:  var(--paper-pink-500);
+					--paper-toggle-button-checked-button-color:  var(--paper-pink-500);
+					--paper-toggle-button-checked-ink-color: var(--paper-pink-500);
+					--paper-toggle-button-unchecked-bar-color:  var(--paper-indigo-900);
+					--paper-toggle-button-unchecked-button-color:  var(--paper-indigo-900);
+					--paper-toggle-button-unchecked-ink-color: var(--paper-indigo-900);
+				}
+			</style>
+			<iron-ajax
+				auto
+				url="[[importPath]]hero.json"
+				handle-as="json"
+				last-response="{{heroPool}}">
+			</iron-ajax>
+			<div id="teams" class="horizontal layout justified">
+				<div class="team blue-team">
+					<h3>Blue Team</h3>
+
+					<strong>Player 1</strong>
+					<div class="horizontal layout justified">
+						<paper-input id="bluePlayer1Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer1Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer1Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+					<strong>Player 2</strong>
+					<div class="horizontal layout">
+						<paper-input id="bluePlayer2Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer2Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer2Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+					<strong>Player 3</strong>
+					<div class="horizontal layout">
+						<paper-input id="bluePlayer3Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer3Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer3Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+					<strong>Player 4</strong>
+					<div class="horizontal layout">
+						<paper-input id="bluePlayer4Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer4Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer4Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+					<strong>Player 5</strong>
+					<div class="horizontal layout">
+						<paper-input id="bluePlayer5Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer5Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer5Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+					<strong>Player 6</strong>
+					<div class="horizontal layout">
+						<paper-input id="bluePlayer6Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer6Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{bluePlayer6Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+				</div>
+
+				<div class="team red-team">
+					<h3>Red Team</h3>
+
+					<strong>Player 1</strong>
+					<div class="horizontal layout justified">
+						<paper-input id="redPlayer1Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer1Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer1Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+					<strong>Player 2</strong>
+					<div class="horizontal layout">
+						<paper-input id="redPlayer2Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer2Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer2Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+					<strong>Player 3</strong>
+					<div class="horizontal layout">
+						<paper-input id="redPlayer3Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer3Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer3Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+					<strong>Player 4</strong>
+					<div class="horizontal layout">
+						<paper-input id="redPlayer4Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer4Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer4Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+					<strong>Player 5</strong>
+					<div class="horizontal layout">
+						<paper-input id="redPlayer5Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer5Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer5Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+
+					<strong>Player 6</strong>
+					<div class="horizontal layout">
+						<paper-input id="redPlayer6Name" label="Name" tabindex="1"></paper-input>
+						<paper-dropdown-menu label="Class" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer6Class}}">
+								<template is="dom-repeat" items="{{heroPool}}"><paper-item role$="{{item.name}}">{{item.name}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+						<paper-dropdown-menu label="Role" tabindex="2">
+							<paper-listbox slot="dropdown-content" attr-for-selected="role" selected="{{redPlayer6Role}}">
+								<template is="dom-repeat" items="{{roles}}"><paper-item role$="{{item.role}}">{{item.role}}</paper-item></template>
+							</paper-listbox>
+						</paper-dropdown-menu>
+					</div>
+
+				</div>
+			</div>
+			<br />
+			<div class="horizontal layout justified ">
+				<div class="horizontal layout">
+					<p>Blue Roster</p>
+					<paper-toggle-button id="rosterToggle" checked="{{_roster}}" on-change="_rosterChange"></paper-toggle-button>
+					<p>Red Roster</p>
+				</div>
+				<div class="horizontal layout">
+					<paper-button raised id="show" on-tap="showRoster">Show</paper-button>
+					<paper-button raised id="hide" on-tap="hideRoster">Hide</paper-button>
+				</div>
+			</div>
+	</template>
+	<script src="roster-control.js"></script>
+	</dom-module>
+</body>
+<roster-control></roster-control>

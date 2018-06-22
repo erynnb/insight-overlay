@@ -25,11 +25,11 @@
 			scoreboardVisible.on('change', newVal => {
 				if (newVal) {
 					this.$.show.setAttribute('hidden', 'true');
-					this.$.update.removeAttribute('hidden');
+					//this.$.update.removeAttribute('hidden');
 					this.$.hide.removeAttribute('disabled');
 				} else {
 					this.$.show.removeAttribute('hidden');
-					this.$.update.setAttribute('hidden', 'true');
+					//this.$.update.setAttribute('hidden', 'true');
 					this.$.hide.setAttribute('disabled', 'true');
 				}
 			});
