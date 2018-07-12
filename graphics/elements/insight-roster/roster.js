@@ -30,15 +30,6 @@
 					value: false,
 					observer: '_visibleChanged'
 				},
-				timeline: {
-					type: TimelineLite,
-					readOnly: true,
-					value() {
-						return new TimelineLite({
-							autoRemoveChildren: true
-						});
-					}
-				},
 				initialized: {
 					type: Boolean,
 					value: false
@@ -48,6 +39,8 @@
 
 		ready() {
 			super.ready();
+			this.timeline = new TimelineLite({autoRemoveChildren: true});
+
 			this.player1role = 'flex';
 			this.player2role = 'flex';
 			this.player3role = 'flex';
@@ -117,9 +110,11 @@
 					this.player6role = this.redRoster.player6.role;
 				}
 			});
-
-			rosterVisible.on('change', newVal => {
-				this.visible = newVal;
+			NodeCG.waitForReplicants(rosterActive, scores, blueRoster, redRoster).then(() => {
+				console.log('rosters are ready to use');
+				rosterVisible.on('change', newVal => {
+					this.visible = newVal;
+				});
 			});
 		}
 
@@ -178,180 +173,115 @@
 			const teamNameImage = Array.from(this.shadowRoot.querySelectorAll('.team-name-image'));
 			const teamName = Array.from(this.shadowRoot.querySelectorAll('.team-name p'));
 
-			this.timeline.fromTo(portraitBoxPlayer6, 0.2, {
-				className: '-=visible'
-			}, {
+			this.timeline.add('start');
+			this.timeline.to(portraitBoxPlayer6, 0.2, {
 				className: '+=visible'
-			}, 0);
-			this.timeline.fromTo(portraitRosterPlayer6, 0.1, {
-				className: '-=visible'
-			}, {
+			}, 'start');
+			this.timeline.to(portraitRosterPlayer6, 0.1, {
 				className: '+=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 
-			this.timeline.fromTo(namePlayer6, 0.4, {
-				className: '-=visible'
-			}, {
+			this.timeline.to(namePlayer6, 0.4, {
 				className: '+=visible'
-			}, 0.3);
-			this.timeline.fromTo(rolePlayer6, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.3');
+			this.timeline.to(rolePlayer6, 0.4, {
 				className: '+=visible'
-			}, 0.3);
-			this.timeline.fromTo(portraitPlayer6, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.3');
+			this.timeline.to(portraitPlayer6, 0.4, {
 				className: '+=visible'
-			}, 0.3);
+			}, 'start+=0.3');
 
-			this.timeline.fromTo(portraitBoxPlayer5, 0.2, {
-				className: '-=visible'
-			}, {
+			this.timeline.to(portraitBoxPlayer5, 0.2, {
 				className: '+=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitRosterPlayer5, 0.1, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitRosterPlayer5, 0.1, {
 				className: '+=visible'
-			}, 0.2);
+			}, 'start+=0.2');
 
-			this.timeline.fromTo(namePlayer5, 0.4, {
-				className: '-=visible'
-			}, {
+			this.timeline.to(namePlayer5, 0.4, {
 				className: '+=visible'
-			}, 0.4);
-			this.timeline.fromTo(rolePlayer5, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.4');
+			this.timeline.to(rolePlayer5, 0.4, {
 				className: '+=visible'
-			}, 0.4);
-			this.timeline.fromTo(portraitPlayer5, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.4');
+			this.timeline.to(portraitPlayer5, 0.4, {
 				className: '+=visible'
-			}, 0.4);
+			}, 'start+=0.4');
 
-			this.timeline.fromTo(portraitBoxPlayer4, 0.2, {
-				className: '-=visible'
-			}, {
+			this.timeline.to(portraitBoxPlayer4, 0.2, {
 				className: '+=visible'
-			}, 0.2);
-			this.timeline.fromTo(portraitRosterPlayer4, 0.1, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.2');
+			this.timeline.to(portraitRosterPlayer4, 0.1, {
 				className: '+=visible'
-			}, 0.3);
+			}, 'start+=0.3');
 
-			this.timeline.fromTo(namePlayer4, 0.4, {
-				className: '-=visible'
-			}, {
+			this.timeline.to(namePlayer4, 0.4, {
 				className: '+=visible'
-			}, 0.5);
-			this.timeline.fromTo(rolePlayer4, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.5');
+			this.timeline.to(rolePlayer4, 0.4, {
 				className: '+=visible'
-			}, 0.5);
-			this.timeline.fromTo(portraitPlayer4, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.5');
+			this.timeline.to(portraitPlayer4, 0.4, {
 				className: '+=visible'
-			}, 0.5);
+			}, 'start+=0.5');
 
-			this.timeline.fromTo(portraitBoxPlayer3, 0.2, {
-				className: '-=visible'
-			}, {
+			this.timeline.to(portraitBoxPlayer3, 0.2, {
 				className: '+=visible'
-			}, 0.3);
-			this.timeline.fromTo(portraitRosterPlayer3, 0.1, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.3');
+			this.timeline.to(portraitRosterPlayer3, 0.1, {
 				className: '+=visible'
-			}, 0.4);
+			}, 'start+=0.4');
 
-			this.timeline.fromTo(namePlayer3, 0.4, {
-				className: '-=visible'
-			}, {
+			this.timeline.to(namePlayer3, 0.4, {
 				className: '+=visible'
-			}, 0.6);
-			this.timeline.fromTo(rolePlayer3, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.6');
+			this.timeline.to(rolePlayer3, 0.4, {
 				className: '+=visible'
-			}, 0.6);
-			this.timeline.fromTo(portraitPlayer3, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.6');
+			this.timeline.to(portraitPlayer3, 0.4, {
 				className: '+=visible'
-			}, 0.6);
-			this.timeline.fromTo(portraitBoxPlayer2, 0.2, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.6');
+			this.timeline.to(portraitBoxPlayer2, 0.2, {
 				className: '+=visible'
-			}, 0.4);
-			this.timeline.fromTo(portraitRosterPlayer2, 0.1, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.4');
+			this.timeline.to(portraitRosterPlayer2, 0.1, {
 				className: '+=visible'
-			}, 0.5);
+			}, 'start+=0.5');
 
-			this.timeline.fromTo(namePlayer2, 0.4, {
-				className: '-=visible'
-			}, {
+			this.timeline.to(namePlayer2, 0.4, {
 				className: '+=visible'
-			}, 0.7);
-			this.timeline.fromTo(rolePlayer2, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.7');
+			this.timeline.to(rolePlayer2, 0.4, {
 				className: '+=visible'
-			}, 0.7);
-			this.timeline.fromTo(portraitPlayer2, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.7');
+			this.timeline.to(portraitPlayer2, 0.4, {
 				className: '+=visible'
-			}, 0.7);
-			this.timeline.fromTo(portraitBoxPlayer1, 0.2, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.7');
+			this.timeline.to(portraitBoxPlayer1, 0.2, {
 				className: '+=visible'
-			}, 0.5);
-			this.timeline.fromTo(portraitRosterPlayer1, 0.1, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.5');
+			this.timeline.to(portraitRosterPlayer1, 0.1, {
 				className: '+=visible'
-			}, 0.6);
+			}, 'start+=0.6');
 
-			this.timeline.fromTo(namePlayer1, 0.4, {
-				className: '-=visible'
-			}, {
+			this.timeline.to(namePlayer1, 0.4, {
 				className: '+=visible'
-			}, 0.8);
-			this.timeline.fromTo(rolePlayer1, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.8');
+			this.timeline.to(rolePlayer1, 0.4, {
 				className: '+=visible'
-			}, 0.8);
-			this.timeline.fromTo(portraitPlayer1, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.8');
+			this.timeline.to(portraitPlayer1, 0.4, {
 				className: '+=visible'
-			}, 0.8);
-			this.timeline.fromTo(teamNameBar, 0.2, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.8');
+			this.timeline.to(teamNameBar, 0.2, {
 				className: '+=visible'
-			}, 0.65);
-			this.timeline.fromTo(teamNameImage, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.65');
+			this.timeline.to(teamNameImage, 0.4, {
 				className: '+=visible'
-			}, 0.7);
-			this.timeline.fromTo(teamName, 0.4, {
-				className: '-=visible'
-			}, {
+			}, 'start+=0.7');
+			this.timeline.to(teamName, 0.4, {
 				className: '+=visible'
-			}, 0.7);
+			}, 'start+=0.7');
 		}
 
 		hide() {
@@ -401,184 +331,119 @@
 			const teamNameBar = Array.from(this.shadowRoot.querySelectorAll('.team-name'));
 			const teamNameImage = Array.from(this.shadowRoot.querySelectorAll('.team-name-image'));
 			const teamName = Array.from(this.shadowRoot.querySelectorAll('.team-name p'));
+			this.timeline.add('start');
 
-			this.timeline.fromTo(namePlayer1, 0, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(namePlayer1, 0, {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(rolePlayer1, 0, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(rolePlayer1, 0,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitPlayer1, 0, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitPlayer1, 0,  {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 
-			this.timeline.fromTo(portraitBoxPlayer1, 0.2, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(portraitBoxPlayer1, 0.2,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitRosterPlayer1, 0.2, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitRosterPlayer1, 0.2,  {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 
-			this.timeline.fromTo(namePlayer2, 0.1, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(namePlayer2, 0.1,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(rolePlayer2, 0.1, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(rolePlayer2, 0.1, {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitPlayer2, 0.1, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitPlayer2, 0.1,  {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 
-			this.timeline.fromTo(portraitBoxPlayer2, 0.3, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(portraitBoxPlayer2, 0.3,{
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitRosterPlayer2, 0.3, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitRosterPlayer2, 0.3, {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 
 			//
-			this.timeline.fromTo(namePlayer3, 0.1, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(namePlayer3, 0.1,{
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(rolePlayer3, 0.1, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(rolePlayer3, 0.1,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitPlayer3, 0.1, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitPlayer3, 0.1,  {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 
-			this.timeline.fromTo(portraitBoxPlayer3, 0.4, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(portraitBoxPlayer3, 0.4,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitRosterPlayer3, 0.4, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitRosterPlayer3, 0.4,  {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 			//
-			this.timeline.fromTo(namePlayer4, 0.1, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(namePlayer4, 0.1,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(rolePlayer4, 0.1, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(rolePlayer4, 0.1,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitPlayer4, 0.1, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitPlayer4, 0.1,  {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 
-			this.timeline.fromTo(portraitBoxPlayer4, 0.5, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(portraitBoxPlayer4, 0.5,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitRosterPlayer4, 0.5, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitRosterPlayer4, 0.5, {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 			//
-			this.timeline.fromTo(namePlayer5, 0.1, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(namePlayer5, 0.1, {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(rolePlayer5, 0.1, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(rolePlayer5, 0.1,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitPlayer5, 0.1, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitPlayer5, 0.1,  {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 
-			this.timeline.fromTo(portraitBoxPlayer5, 0.6, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(portraitBoxPlayer5, 0.6,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitRosterPlayer5, 0.6, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitRosterPlayer5, 0.6, {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 			//
-			this.timeline.fromTo(namePlayer6, 0.1, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(namePlayer6, 0.1, {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(rolePlayer6, 0.1, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(rolePlayer6, 0.1, {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitPlayer6, 0.1, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitPlayer6, 0.1,  {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 
-			this.timeline.fromTo(portraitBoxPlayer6, 0.7, {
-				className: '+=visible'
-			}, {
+			this.timeline.to(portraitBoxPlayer6, 0.7,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(portraitRosterPlayer6, 0.7, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(portraitRosterPlayer6, 0.7, {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(teamNameBar, 0.2, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(teamNameBar, 0.2, {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(teamNameImage, 0.5, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(teamNameImage, 0.5,  {
 				className: '-=visible'
-			}, 0.1);
-			this.timeline.fromTo(teamName, 0.5, {
-				className: '+=visible'
-			}, {
+			}, 'start+=0.1');
+			this.timeline.to(teamName, 0.5,  {
 				className: '-=visible'
-			}, 0.1);
+			}, 'start+=0.1');
 		}
 		_rosterChange(newVal) {
 			this.rosterActive = newVal;
