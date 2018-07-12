@@ -22,7 +22,7 @@
     "eslint-plugin-html": "^3.1.1"
   },
   "nodecg": {
-    "compatibleRange": "~0.9.7",
+    "compatibleRange": "~1.0.0",
     "assetCategories": [
       {
         "name": "teamlogos",
